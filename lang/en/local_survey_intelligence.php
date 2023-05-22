@@ -133,6 +133,7 @@ $string['privacy_des'] = 'Accept conditions';
 $string['privacy_policy'] = 'Privacy policy';
 $string['email_cannot_be_empty'] = 'The Email field cannot be empty';
 $string['activate'] = 'Activate';
+$string['placeholder_text'] = 'name@example.com';
 
 // Description.
 $string['Describ'] = "About this plugin";

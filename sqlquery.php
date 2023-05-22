@@ -158,7 +158,7 @@ function get_mean_from_course($courseid) {
 function get_name_user_intelligence($userid) {
     global $DB;
 
-    $sql = "SELECT CONCAT(firstname, ' ', lastname) AS name FROM {user} WHERE id = :userid";
+    $sql = "SELECT lastname AS name FROM {user} WHERE id = :userid";
     $params = ['userid' => $userid];
     $name = $DB->get_record_sql($sql, $params);
 
