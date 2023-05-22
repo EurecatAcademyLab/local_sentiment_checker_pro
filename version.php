@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_survey_intelligence';
-$plugin->requires = 2021051700;
+$plugin->requires = 2023051500;
 $plugin->version = 20236110400;
 $plugin->release = "0.1.2";
 $plugin->maturity = MATURITY_ALPHA;
