@@ -28,56 +28,59 @@ defined('MOODLE_INTERNAL') || die();
 $isgest = isguestuser();
 
 
-if (!$isgest && isloggedin()) {
-    /**
-     * Insert a link to index.php on the site front page navigation menu.
-     * @param navigation_node $frontpage Node representing the front page in the navigation tree.
-     */
-    function local_survey_intelligence_extend_navigation_frontpage(navigation_node $frontpage) {
-        $frontpage->add(
-            get_string('pluginname', 'local_survey_intelligence'),
-            new moodle_url('/local/survey_intelligence/index.php')
-        );
+/**
+ * Insert a link to index.php on the site front page navigation menu.
+ * @param navigation_node $frontpage Node representing the front page in the navigation tree.
+ */
+function local_survey_intelligence_extend_navigation_frontpage(navigation_node $frontpage) {
+    if (is_siteadmin()) {
+        if (!$isgest && isloggedin()) {
+            $frontpage->add(
+                get_string('pluginname', 'local_survey_intelligence'),
+                new moodle_url('/local/survey_intelligence/index.php')
+            );
+        }
     }
 }
 
-if (!$isgest && isloggedin()) {
-    /**
-     * Insert a link to index.php on the site front page navigation menu.
-     * @param navigation_node $frontpage Node representing the front page in the navigation tree.
-     */
-    function local_survey_intelligence_extend_navigation_user(navigation_node $frontpage) {
-        $frontpage->add(
-            get_string('pluginname', 'local_survey_intelligence'),
-            new moodle_url('/local/survey_intelligence/index.php'),
-            navigation_node::TYPE_CUSTOM,
-            null,
-            null,
-            new pix_icon('t/message', '')
-        );
+/**
+ * Insert a link to index.php on the site front page navigation menu.
+ * @param navigation_node $frontpage Node representing the front page in the navigation tree.
+ */
+function local_survey_intelligence_extend_navigation_user(navigation_node $frontpage) {
+    if (is_siteadmin()) {
+        if (!$isgest && isloggedin()) {
+            $frontpage->add(
+                get_string('pluginname', 'local_survey_intelligence'),
+                new moodle_url('/local/survey_intelligence/index.php'),
+                navigation_node::TYPE_CUSTOM,
+                null,
+                null,
+                new pix_icon('t/message', '')
+            );
+        }
     }
 }
 
-if (get_config('local_survey_intelligence', 'showinnavigation') && !$isgest && isloggedin()) {
+/**
+ * Add link to index.php into navigation drawer.
+ * Admin decide if show it or not.
+ * @param global_navigation $root Node representing the global navigation tree.
+ */
+function local_survey_intelligence_extend_navigation(global_navigation $root) {
+    if (is_siteadmin()) {
+        if (get_config('local_survey_intelligence', 'showinnavigation') && !$isgest && isloggedin()) {
+            $node = navigation_node::create(
+                get_string('pluginname', 'local_survey_intelligence'),
+                new moodle_url('/local/survey_intelligence/index.php'),
+                navigation_node::TYPE_CUSTOM,
+                null,
+                null,
+                new pix_icon('t/message', '')
+            );
+            $node->showinflatnavigation = true;
 
-    /**
-     * Add link to index.php into navigation drawer.
-     * Admin decide if show it or not.
-     * @param global_navigation $root Node representing the global navigation tree.
-     */
-    function local_survey_intelligence_extend_navigation(global_navigation $root) {
-
-        $node = navigation_node::create(
-            get_string('pluginname', 'local_survey_intelligence'),
-            new moodle_url('/local/survey_intelligence/index.php'),
-            navigation_node::TYPE_CUSTOM,
-            null,
-            null,
-            new pix_icon('t/message', '')
-        );
-        $node->showinflatnavigation = true;
-
-        $root->add_node($node);
+            $root->add_node($node);
+        }
     }
-
 }
