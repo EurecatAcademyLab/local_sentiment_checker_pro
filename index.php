@@ -100,32 +100,32 @@ $premium = new si_premium_form();
 $about = new si_about_form();
 
 
-$privacysurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'privacy'));
-$apikeychecksurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'apikey'));
-$emailsurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'email'));
-$productsurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'productid'));
+// $privacysurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'privacy'));
+// $apikeychecksurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'apikey'));
+// $emailsurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'email'));
+// $productsurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'productid'));
 call_woocomerce_status_intelligence();
 
 
 
-if (empty($emailsurvey) || strlen($emailsurvey->value) == 0 ||
-$emailsurvey->value == '' || $emailsurvey->value == null || !$emailsurvey) {
-    redirect (new moodle_url('/admin/settings.php?section=localsurveyintelligence'));
-}
-if (!$productsurvey || $productsurvey->value != 142 ) {
-    redirect (new moodle_url('/admin/settings.php?section=localsurveyintelligence'));
-}
-if (!$privacysurvey || $privacysurvey->value == 0) {
-    redirect (new moodle_url('/admin/settings.php?section=localsurveyintelligence'));
-}
-if ( !$apikeychecksurvey || $apikeychecksurvey->value != 'aa7cda56d137325b560dc9d1136e5474d08ff5b9') {
-    redirect (new moodle_url('/admin/settings.php?section=localsurveyintelligence'));
-}
+// if (empty($emailsurvey) || strlen($emailsurvey->value) == 0 ||
+// $emailsurvey->value == '' || $emailsurvey->value == null || !$emailsurvey) {
+//     redirect (new moodle_url('/admin/settings.php?section=localsurveyintelligence'));
+// }
+// if (!$productsurvey || $productsurvey->value != 142 ) {
+//     redirect (new moodle_url('/admin/settings.php?section=localsurveyintelligence'));
+// }
+// if (!$privacysurvey || $privacysurvey->value == 0) {
+//     redirect (new moodle_url('/admin/settings.php?section=localsurveyintelligence'));
+// }
+// if ( !$apikeychecksurvey || $apikeychecksurvey->value != 'aa7cda56d137325b560dc9d1136e5474d08ff5b9') {
+//     redirect (new moodle_url('/admin/settings.php?section=localsurveyintelligence'));
+// }
 
 echo $OUTPUT->header();
 
 $output = "";
-if (!$statusteams || $statusteams == 1 ) { 
+// if (!$statusteams || $statusteams == 1 ) { 
 
     $output .= html_writer::start_tag('div', ['id' => 'statusintelligence', 'class' => 'mb-3']);
     $output .= html_writer::end_tag('div');
@@ -257,13 +257,13 @@ if (!$statusteams || $statusteams == 1 ) {
                     $output .= html_writer::end_tag('div');
     
                     $output .= html_writer::end_tag('div');
-} else {
-    $output .= html_writer::start_tag('div');
-    // $output .= $noactiveteams->definition();
-    $output .= 'Finito';
-    $output .= html_writer::end_tag('div');
+// } else {
+//     $output .= html_writer::start_tag('div');
+//     // $output .= $noactiveteams->definition();
+//     $output .= 'Finito';
+//     $output .= html_writer::end_tag('div');
 
-}
+// }
 
                 echo $output;
 

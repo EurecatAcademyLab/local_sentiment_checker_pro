@@ -42,6 +42,8 @@ function call_woocomerce_intelligence() {
     global $PAGE;
     $PAGE->requires->js('/local/survey_intelligence/amd/woocomerceintelligence.js');
     $PAGE->requires->js_init_call('woocommerce_api_active_intelligence', $data);
+    call_woocomerce_status_intelligence();
+    call_woocomerce_status_intelligence();
 }
 
 /**

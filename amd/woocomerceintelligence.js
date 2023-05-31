@@ -162,8 +162,9 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
         var data = '';
         email = email.replace(/\s+/g, "");
         if (email.length == 0 || email == '') {
+            console.log('email')
             validateEmailSurvey();
-        } else if (!productid  || productid != 138){
+        } else if (!productid  || productid != 142){
             validateProductSurvey();
         } else if (apikey != 'aa7cda56d137325b560dc9d1136e5474d08ff5b9' || apikey == 0 || apikey == '' || apikey.length == 0){
             validateApikeySurvey();
@@ -203,7 +204,7 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
                     let urlSettingsSurvey, finalUrlSurvey;
                     if (urlSurvey.indexOf("index") !== -1) {
                         urlSettingsSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/settingsSurvey.php');
-                        finalUrlSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/Surveysavehash.php');
+                        finalUrlSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/surveysavehash.php');
                     } else {
                         urlSettingsSurvey = urlSurvey.replace(/\/admin\/.*$/, '/local/survey_intelligence/classes/settings/settingsSurvey.php');
                         finalUrlSurvey = urlSurvey.replace(/\/admin\/.*$/, '/local/survey_intelligence/classes/settings/Surveysavehash.php');
@@ -258,25 +259,26 @@ async function hashString(str) {
  */
 function insertIntoDivSurvey(text) {
     var divInclude = document.getElementById('statusintelligence');
+    if (divInclude != null) {
+        // Insert into div
+        divInclude.innerHTML = "<p class='text-info'>" + text + "</p>";
 
-    // Insert into div
-    divInclude.innerHTML = "<p class='text-info'>" + text + "</p>";
+        // Insert button
+        var closeButton = document.createElement('button');
+        closeButton.innerHTML = 'X';
+        closeButton.type = 'button'; // Agregar type='button' para prevenir recargar la página
+        closeButton.classList.add('close');
+        closeButton.addEventListener('click', function() {
+            divInclude.innerHTML = ''; // Eliminar el contenido de divInclude
+            divInclude.classList.remove('p-3', 'mb-3', 'rounded', 'bg-light', 'opacity-75', 'd-flex', 'justify-content-between', 'align-items-center');
+        });
 
-    // Insert button
-    var closeButton = document.createElement('button');
-    closeButton.innerHTML = 'X';
-    closeButton.type = 'button'; // Agregar type='button' para prevenir recargar la página
-    closeButton.classList.add('close');
-    closeButton.addEventListener('click', function() {
-        divInclude.innerHTML = ''; // Eliminar el contenido de divInclude
-        divInclude.classList.remove('p-3', 'mb-3', 'rounded', 'bg-light', 'opacity-75', 'd-flex', 'justify-content-between', 'align-items-center');
-    });
+        // Insert into div
+        divInclude.appendChild(closeButton);
 
-    // Insert into div
-    divInclude.appendChild(closeButton);
-
-    // Insert css
-    divInclude.classList.add('p-3', 'mb-3', 'rounded', 'bg-light', 'opacity-75', 'd-flex', 'justify-content-between', 'align-items-center');
+        // Insert css
+        divInclude.classList.add('p-3', 'mb-3', 'rounded', 'bg-light', 'opacity-75', 'd-flex', 'justify-content-between', 'align-items-center');
+    }
 }
 
 
