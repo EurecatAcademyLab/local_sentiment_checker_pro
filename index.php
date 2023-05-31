@@ -107,6 +107,8 @@ $apikeychecksurvey = $DB->get_record('config_plugins', array('plugin' => 'local_
 $emailsurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'email'));
 $productsurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'productid'));
 call_woocomerce_status_intelligence();
+$statussurvey = get_config('local_survey_intelligence', 'status');
+
 
 if (empty($emailsurvey) || strlen($emailsurvey->value) == 0 ||
 $emailsurvey->value == '' || $emailsurvey->value == null || !$emailsurvey) {
@@ -125,7 +127,7 @@ if ( !$apikeychecksurvey || $apikeychecksurvey->value != 'aa7cda56d137325b560dc9
 echo $OUTPUT->header();
 
 $output = "";
-if (!$statusteams || $statusteams == 1 ) {
+if (!$statussurvey || $statussurvey == 1 ) {
 
     $output .= html_writer::start_tag('div', ['id' => 'statusintelligence', 'class' => 'mb-3']);
     $output .= html_writer::end_tag('div');
@@ -260,9 +262,7 @@ if (!$statusteams || $statusteams == 1 ) {
     $output .= html_writer::start_tag('div');
     $output .= $noactivesurvey->definition();
     $output .= html_writer::end_tag('div');
-
 }
-
                 echo $output;
 
                 echo $OUTPUT->footer();
