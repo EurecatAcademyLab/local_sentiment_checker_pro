@@ -57,3 +57,4 @@ if ($urlrecord) {
     $urlrecord->value = $url;
     $DB->insert_record('config_plugins', $urlrecord);
 }
+
