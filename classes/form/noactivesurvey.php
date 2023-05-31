@@ -34,7 +34,7 @@ $idcourse = optional_param('idcourse', null, PARAM_INT);
 /**
  * Class form to create a customisable filter or personal filter.
  */
-class noactive_form extends moodleform {
+class noactive_survey_form extends moodleform {
 
     /**
      * Define the form.
