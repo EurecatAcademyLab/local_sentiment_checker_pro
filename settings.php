@@ -100,7 +100,7 @@ if ($hassiteconfig) {
             'local_survey_intelligence/apikey',
             new lang_string('apikey', 'local_survey_intelligence'),
             new lang_string('apikey_des', 'local_survey_intelligence'),
-            'd564dde308ff319571349c617a9185dec25893d1',
+            'aa7cda56d137325b560dc9d1136e5474d08ff5b9',
             PARAM_TEXT,
             50,
             'maxlength="50"readonly'
@@ -114,7 +114,7 @@ if ($hassiteconfig) {
         'local_survey_intelligence/productid',
         new lang_string('productid', 'local_survey_intelligence'),
         new lang_string('productid_des', 'local_survey_intelligence'),
-        39,
+        142,
         PARAM_INT);
 
         $settingspage->add($productidsettingsintelligence);

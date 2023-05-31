@@ -49,12 +49,21 @@ function call_woocomerce_intelligence() {
  * @return Void.
  */
 function call_woocomerce_status_intelligence() {
+    global $DB;
 
     $apikey = get_config('local_survey_intelligence', 'apikey');
     $productid = get_config('local_survey_intelligence', 'productid');
     $email = get_config('local_survey_intelligence', 'email');
+    $privacysurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'privacy'));
+    $plugin = 'survey_intelligence';
 
-    $data = array("apikey" => $apikey, "productid" => $productid, 'email' => $email);
+    $data = array(
+        "apikey" => $apikey,
+        "productid" => $productid,
+        'email' => $email,
+        'plugin' => $plugin,
+        'privacy' => $privacysurvey->value,
+    );
     global $PAGE;
     $PAGE->requires->js('/local/survey_intelligence/amd/woocomerceintelligence.js');
     $PAGE->requires->js_init_call('woocommerce_api_status_intelligence', $data);

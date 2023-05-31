@@ -25,16 +25,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$isgest = isguestuser();
-
-
 /**
  * Insert a link to index.php on the site front page navigation menu.
  * @param navigation_node $frontpage Node representing the front page in the navigation tree.
  */
 function local_survey_intelligence_extend_navigation_frontpage(navigation_node $frontpage) {
     if (is_siteadmin()) {
-        if (!$isgest && isloggedin()) {
+        if (!isguestuser() && isloggedin()) {
             $frontpage->add(
                 get_string('pluginname', 'local_survey_intelligence'),
                 new moodle_url('/local/survey_intelligence/index.php')
@@ -49,7 +46,7 @@ function local_survey_intelligence_extend_navigation_frontpage(navigation_node $
  */
 function local_survey_intelligence_extend_navigation_user(navigation_node $frontpage) {
     if (is_siteadmin()) {
-        if (!$isgest && isloggedin()) {
+        if (!isguestuser() && isloggedin()) {
             $frontpage->add(
                 get_string('pluginname', 'local_survey_intelligence'),
                 new moodle_url('/local/survey_intelligence/index.php'),
@@ -69,7 +66,7 @@ function local_survey_intelligence_extend_navigation_user(navigation_node $front
  */
 function local_survey_intelligence_extend_navigation(global_navigation $root) {
     if (is_siteadmin()) {
-        if (get_config('local_survey_intelligence', 'showinnavigation') && !$isgest && isloggedin()) {
+        if (get_config('local_survey_intelligence', 'showinnavigation') && !isguestuser() && isloggedin()) {
             $node = navigation_node::create(
                 get_string('pluginname', 'local_survey_intelligence'),
                 new moodle_url('/local/survey_intelligence/index.php'),

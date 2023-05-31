@@ -190,6 +190,10 @@ function callapi($method, $url, $data) {
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_HTTPHEADER, array(
        'APIKEY: '.get_config('local_survey_intelligence', 'apikey'),
+       'Productid:' . get_config('local_survey_intelligence', 'productid'),
+       'instancia:' . get_config('local_survey_intelligence', 'instancia'),
+       'email:' . get_config('local_survey_intelligence', 'email'),
+       'name:' . get_config('local_survey_intelligence', 'name'),
        'Content-Type: application/json',
     ));
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);

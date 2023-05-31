@@ -26,21 +26,34 @@
 require_once(__DIR__.'/../../../../config.php');
 require_login();
 
+$url = optional_param('host', null, PARAM_TEXT);
 $h = optional_param('h', null, PARAM_TEXT);
-
 $plugin = 'local_survey_intelligence';
-$name = 'hash';
-$existingrecord = $DB->get_record('config_plugins', array('plugin' => $plugin, 'name' => $name));
 
-if ($existingrecord) {
-    $record = $existingrecord;
-    $record->value = $h;
-    $DB->update_record('config_plugins', $record);
+// Update or insert 'hash' record.
+$hashrecord = $DB->get_record('config_plugins', array('plugin' => $plugin, 'name' => 'hash'));
+
+if ($hashrecord) {
+    $hashrecord->value = $h;
+    $DB->update_record('config_plugins', $hashrecord);
 } else {
-    $record = new stdClass();
-    $record->plugin = $plugin;
-    $record->name = $name;
-    $record->value = $h;
-    $DB->insert_record('config_plugins', $record);
+    $hashrecord = new stdClass();
+    $hashrecord->plugin = $plugin;
+    $hashrecord->name = 'hash';
+    $hashrecord->value = $h;
+    $DB->insert_record('config_plugins', $hashrecord);
 }
 
+// Update or insert 'url' record.
+$urlrecord = $DB->get_record('config_plugins', array('plugin' => $plugin, 'name' => 'url'));
+
+if ($urlrecord) {
+    $urlrecord->value = $url;
+    $DB->update_record('config_plugins', $urlrecord);
+} else {
+    $urlrecord = new stdClass();
+    $urlrecord->plugin = $plugin;
+    $urlrecord->name = 'url';
+    $urlrecord->value = $url;
+    $DB->insert_record('config_plugins', $urlrecord);
+}

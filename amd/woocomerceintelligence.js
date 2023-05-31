@@ -29,17 +29,14 @@
  * @param {string} url - A string indicating the URL to send the AJAX request to.
  * @returns {void}
  */
-function setStatusintelligence(active, url) {
-    let baseUrl = url.replace(/(.*\/survey_intelligence\/).*$/, '$1');
-    url = baseUrl + 'classes/settings/settings.php'
-
+function setStatusSurvey(active, url) {
     require(['jquery'], function($) {
         $(document).ready(function () { 
             $.ajax({
                 url: url,
                 data: {active},
                 success: function(data) {
-                    console.log('response_status Survey Intelligence' + data);
+                    // console.log(data);
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     console.log('Error! ' + errorThrown);
@@ -53,20 +50,19 @@ function setStatusintelligence(active, url) {
  * Documentation for the setH function.
  * This function sends an AJAX request to a specified URL to update the H.
  * @param {string} h - indicate.
+ * @param {string} host - A string indicating the host.
  * @param {string} url - A string indicating the URL to send the AJAX request to.
  * @returns {void}
  */
-function seth(h, url) {
-    let baseUrl = url.replace(/(.*\/survey_intelligence\/).*$/, '$1');
-    url = baseUrl + 'classes/settings/saveh.php'
+function sethSurvey(h, url, host) {
 
     require(['jquery'], function($) {
         $(document).ready(function () { 
             $.ajax({
                 url: url,
-                data: {h},
+                data: {h, host},
                 success: function(data) {
-                    console.log('response_set Survey Intelligence' + data);
+                    // console.log(data);
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     console.log('Error! ' + errorThrown);
@@ -98,13 +94,18 @@ function setHeaders(headers, xhr) {
  */
 async function woocommerce_api_active_intelligence(yui, apikey, product_id, email) {
     try {
+        var data = '';
         var url = 'https://lab.eurecatacademy.org/?wc-api=wc-am-api&wc_am_action=activate';
 
-        const urlactual = new URL(window.location.href);
-        const host = urlactual.host;
-        const hash = await hashString(host);
+        let urlactualSurvey = window.location.href;
+        let newUrl = urlactualSurvey.replace(/\/admin(.*)$/, '');
+        let finalUrlSurvey = newUrl + '/local/survey_intelligence/classes/settings/savehsurvey.php'
 
-        // seth(hash, url);
+        const urlactualsurvey = new URL(window.location.href);
+        const host = urlactualsurvey.host;
+        const hash = await hashString(host + 'survey');
+
+        sethSurvey(hash, finalUrlSurvey, host);
 
         var params = {
             instance: hash,
@@ -127,7 +128,7 @@ async function woocommerce_api_active_intelligence(yui, apikey, product_id, emai
             if (xhr.status === 200) {
                 var data = xhr.response;
                 // handle data
-                console.log(data);
+                console.log('validation Survey Intelligence: ' + data.success);
             } else {
                 // handle error
                 console.error('Error getting data from API endpoint');
@@ -136,7 +137,9 @@ async function woocommerce_api_active_intelligence(yui, apikey, product_id, emai
 
         xhr.send();
 
-        return data;
+        if (data != undefined) {
+            return data;
+        }
     } catch (err) {
         console.log(err);
     }
@@ -147,65 +150,88 @@ async function woocommerce_api_active_intelligence(yui, apikey, product_id, emai
  * @async
  * @param {string} yui - A unique identifier for the implementation.
  * @param {string} apikey - The API key for the WooCommerce store.
- * @param {number} product_id - The ID of the product being checked.
+ * @param {number} productid - The ID of the product being checked.
  * @param {string} email - The email address of the user being checked.
+ * @param {string} plugin - The plugin name.
+ * @param {string} privacy - The checkbox if a user accept conditions.
  * @returns {Promise<Object>} - A Promise that resolves to the response from the API.
  */
-async function woocommerce_api_status_intelligence(yui, apikey, product_id, email) {
+async function woocommerce_api_status_intelligence(yui, apikey, productid, email, plugin, privacy) {
     try {
 
-        var url = 'https://lab.eurecatacademy.org/?wc-api=wc-am-api&wc_am_action=status';
+        var data = '';
+        email = email.replace(/\s+/g, "");
+        if (email.length == 0 || email == '') {
+            validateEmailSurvey();
+        } else if (!productid  || productid != 138){
+            validateProductSurvey();
+        } else if (apikey != 'aa7cda56d137325b560dc9d1136e5474d08ff5b9' || apikey == 0 || apikey == '' || apikey.length == 0){
+            validateApikeySurvey();
+        } else if ( privacy == 0){
+            validatePrivacySurvey();
+        } else if (apikey == 'aa7cda56d137325b560dc9d1136e5474d08ff5b9' && productid == 142 && plugin == 'survey_intelligence'){
+            validateApikeySurveyCorrect();
+            validateProductSurveyCorrect();
 
-        const urlactual = new URL(window.location.href);
-        const host = urlactual.host;
-        // console.log(host);
-        const hash = await hashString(host);
-        // console.log(hash);
+            var url = 'https://lab.eurecatacademy.org/?wc-api=wc-am-api&wc_am_action=status';
 
-        var params = {
-            instance: hash,
-            object: email + ','+ host,
-            product_id: product_id,
-            api_key: apikey
-        }
+            const urlactual = new URL(window.location.href);
+            const host = urlactual.host;
+            const hash = await hashString(host + 'survey');
 
-        const queryString = Object.keys(params)
-            .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-            .join('&');
-
-        const call_url = url +'&'+ queryString
-        // console.log(call_url);
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', call_url);
-        xhr.responseType = 'json';
-
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                var data = xhr.response;
-                // handle data
-                const urlsettings = window.location.href + 'classes/settings/settings.php';
-                const urlsaveh = window.location.href + 'classes/settings/saveh.php';
-
-                if (data.status_check == 'active') {
-                    var active = 1;
-                    seth(hash, urlsaveh)
-                    setStatusintelligence(active, urlsettings);
-                    insertIntoDiv('Active User');
-                } else {
-                    var active = 0;
-                    setStatusintelligence(active, urlsettings);
-                }
-                console.log(data)
-            }  else {
-                // handle error
-                console.error('Error getting data from API endpoint');
+            var params = {
+                instance: hash,
+                object: email + ','+ host,
+                product_id: productid,
+                api_key: apikey
             }
-        };
 
-        xhr.send();
+            const queryString = Object.keys(params)
+                .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+                .join('&');
 
-        return data;
+            const call_url = url +'&'+ queryString
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', call_url);
+            xhr.responseType = 'json';
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var data = xhr.response;
+                    const urlSurvey = window.location.href;
+                    let urlSettingsSurvey, finalUrlSurvey;
+                    if (urlSurvey.indexOf("index") !== -1) {
+                        urlSettingsSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/settingsSurvey.php');
+                        finalUrlSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/Surveysavehash.php');
+                    } else {
+                        urlSettingsSurvey = urlSurvey.replace(/\/admin\/.*$/, '/local/survey_intelligence/classes/settings/settingsSurvey.php');
+                        finalUrlSurvey = urlSurvey.replace(/\/admin\/.*$/, '/local/survey_intelligence/classes/settings/Surveysavehash.php');
+                    }
+
+                    // handle data
+                    if (data.status_check == 'active') {
+                        var active = 1;
+                        sethSurvey(hash, finalUrlSurvey, host)
+                        setStatusSurvey(active, urlSettingsSurvey);
+                        insertIntoDivSurvey('Active User');
+                        console.log('Status Survey Intelligence: ' + data.status_check);
+                    } else {
+                        var active = 0;
+                        setStatusSurvey(active, urlSettingsSurvey);
+                        console.log('Status Survey Intelligence: ' + data.status_check);
+                    }
+                }  else {
+                    // handle error
+                    console.error('Error getting data from API endpoint');
+                }
+            };
+
+            xhr.send();
+            if (data != undefined) {
+                return data;
+            }
+        }
     } catch (err) {
         console.log(err);
     }
@@ -230,7 +256,7 @@ async function hashString(str) {
  * @param {string} text - The text to be added to the div element.
  * @returns {void}
  */
-function insertIntoDiv(text) {
+function insertIntoDivSurvey(text) {
     var divInclude = document.getElementById('statusintelligence');
 
     // Insert into div
@@ -251,4 +277,113 @@ function insertIntoDiv(text) {
 
     // Insert css
     divInclude.classList.add('p-3', 'mb-3', 'rounded', 'bg-light', 'opacity-75', 'd-flex', 'justify-content-between', 'align-items-center');
+}
+
+
+/**
+ * To check if user introduce a valid email and send a message. 
+ */
+function validateEmailSurvey() {
+
+    var existingErrorDiv = document.getElementById("id_si_unvalid_mail");
+    if (!existingErrorDiv) {
+        var element = document.getElementById("id_s_local_survey_intelligence_email");
+        if (element) {
+            var sibling = element.nextSibling;
+            var errorDiv = document.createElement("div");
+            errorDiv.innerText = "Do not leave this field empty";
+            errorDiv.setAttribute("style", "color: red");
+            errorDiv.setAttribute("id", "id_si_unvalid_mail");
+            element.parentNode.insertBefore(errorDiv, sibling);
+        }
+    }
+}
+
+/**
+ * To check if user have a valid key and send a message to wrong. 
+ */
+function validateApikeySurvey() {
+    var existingErrorDiv = document.getElementById("id_si_unvalid");
+    if (!existingErrorDiv) {
+        var element = document.getElementById("id_s_local_survey_intelligence_apikey");
+        if (element) {
+            var sibling = element.nextSibling;
+            var errorDiv = document.createElement("div");
+            errorDiv.innerText = "Invalid API Key";
+            errorDiv.setAttribute("style", "color: red");
+            errorDiv.setAttribute("id", "id_si_unvalid");
+            element.parentNode.insertBefore(errorDiv, sibling);
+        }
+    }
+}
+
+/**
+ * To check if user have a valid key and send a message "Valid". 
+ */
+function validateApikeySurveyCorrect() {
+    var existingErrorDiv = document.getElementById("id_si_unvalid");
+    if (!existingErrorDiv) {
+        var element = document.getElementById("id_s_local_survey_intelligence_apikey");
+        if (element) {
+            var sibling = element.nextSibling;
+            var errorDiv = document.createElement("div");
+            errorDiv.innerText = "Valid API Key";
+            errorDiv.setAttribute("style", "color: green");
+            errorDiv.setAttribute("id", "id_si_unvalid");
+            element.parentNode.insertBefore(errorDiv, sibling);
+        }
+    }
+}
+
+/**
+ * To check if user have a valid key and send a message "Valid". 
+ */
+function validateProductSurvey() {
+    var existingErrorDiv = document.getElementById("id_si_unvalid_product_Survey");
+    if (!existingErrorDiv) {
+        var element = document.getElementById("id_s_local_survey_intelligence_productid");
+        if (element) {
+            var sibling = element.nextSibling;
+            var errorDiv = document.createElement("div");
+            errorDiv.innerText = "Invalid Product";
+            errorDiv.setAttribute("style", "color: red");
+            errorDiv.setAttribute("id", "id_si_unvalid_product_Survey");
+            element.parentNode.insertBefore(errorDiv, sibling);
+        }
+    }
+}
+/**
+ * To check if user have a valid key and send a message "Valid". 
+ */
+function validateProductSurveyCorrect() {
+    var existingErrorDiv = document.getElementById("id_si_unvalid_product_Survey");
+    if (!existingErrorDiv) {
+        var element = document.getElementById("id_s_local_survey_intelligence_productid");
+        if (element) {
+            var sibling = element.nextSibling;
+            var errorDiv = document.createElement("div");
+            errorDiv.innerText = "Valid Product";
+            errorDiv.setAttribute("style", "color: green");
+            errorDiv.setAttribute("id", "id_si_unvalid_product_Survey");
+            element.parentNode.insertBefore(errorDiv, sibling);
+        }
+    }
+}
+
+/**
+ * To check if user have a valid key and send a message "Valid". 
+ */
+function validatePrivacySurvey() {
+    var existingErrorDiv = document.getElementById("id_si_unvalid_privacy");
+    if (!existingErrorDiv) {
+        var element = document.getElementById("id_s_local_survey_intelligence_privacy");
+        if (element) {
+            var sibling = element.nextSibling;
+            var errorDiv = document.createElement("div");
+            errorDiv.innerText = "Do not leave this checkbox uncheck";
+            errorDiv.setAttribute("style", "color: red");
+            errorDiv.setAttribute("id", "id_si_unvalid_privacy");
+            element.parentNode.insertBefore(errorDiv, sibling);
+        }
+    }
 }
