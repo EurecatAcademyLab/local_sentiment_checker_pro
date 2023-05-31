@@ -203,11 +203,11 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
                     const urlSurvey = window.location.href;
                     let urlSettingsSurvey, finalUrlSurvey;
                     if (urlSurvey.indexOf("index") !== -1) {
-                        urlSettingsSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/settingsSurvey.php');
-                        finalUrlSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/surveysavehash.php');
+                        urlSettingsSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/settingssurvey.php');
+                        finalUrlSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/savehsurvey.php');
                     } else {
-                        urlSettingsSurvey = urlSurvey.replace(/\/admin\/.*$/, '/local/survey_intelligence/classes/settings/settingsSurvey.php');
-                        finalUrlSurvey = urlSurvey.replace(/\/admin\/.*$/, '/local/survey_intelligence/classes/settings/Surveysavehash.php');
+                        urlSettingsSurvey = urlSurvey.replace(/\/admin\/.*$/, '/local/survey_intelligence/classes/settings/settingssurvey.php');
+                        finalUrlSurvey = urlSurvey.replace(/\/admin\/.*$/, '/local/survey_intelligence/classes/settings/savehsurvey.php');
                     }
 
                     // handle data
