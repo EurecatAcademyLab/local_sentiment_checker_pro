@@ -39,7 +39,6 @@ class si_premium_form extends moodleform {
     /**
      * Define the form.
      */
-
     public function definition() {
         global $OUTPUT;
 
