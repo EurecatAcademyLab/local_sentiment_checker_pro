@@ -127,7 +127,7 @@ if ( !$apikeychecksurvey || $apikeychecksurvey->value != 'aa7cda56d137325b560dc9
 echo $OUTPUT->header();
 
 $output = "";
-if (!$statussurvey || $statussurvey == 1 ) {
+if ( $statussurvey == 1 ) {
 
     $output .= html_writer::start_tag('div', ['id' => 'statusintelligence', 'class' => 'mb-3']);
     $output .= html_writer::end_tag('div');
