@@ -86,3 +86,4 @@ function get_headers_call_intelligence() {
     ];
     return $data;
 }
+

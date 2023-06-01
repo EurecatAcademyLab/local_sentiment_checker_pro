@@ -213,6 +213,10 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
                     }
 
                     product_id_survey = parseInt(product_id_survey)
+
+                    if (product_id_survey == getProductIdSurvey()) {
+                        
+                    }
                     // handle data
                     if (data.status_check == 'active' && product_title_survey == getProductTitleSurvey() && product_id_survey == getProductIdSurvey()) {
                         var active = 1;
@@ -220,10 +224,12 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
                         setStatusSurvey(active, urlSettingsSurvey);
                         insertIntoDivSurvey('Active User');
                         console.log('Status Survey Intelligence: ' + data.status_check);
+                        console.log('true')
                     } else {
                         var active = 0;
                         setStatusSurvey(active, urlSettingsSurvey);
                         console.log('Status Survey Intelligence: ' + data.status_check);
+                        console.log('false')
                     }
                 }  else {
                     // handle error

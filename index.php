@@ -101,13 +101,10 @@ $premium = new si_premium_form();
 $about = new si_about_form();
 $noactivesurvey = new noactive_survey_form();
 
-
 $privacysurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'privacy'));
 $apikeychecksurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'apikey'));
 $emailsurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'email'));
 $productsurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'productid'));
-call_woocomerce_status_intelligence();
-$statussurvey = get_config('local_survey_intelligence', 'status');
 
 
 if (empty($emailsurvey) || strlen($emailsurvey->value) == 0 ||
@@ -123,6 +120,9 @@ if (!$privacysurvey || $privacysurvey->value == false) {
 if ( !$apikeychecksurvey || $apikeychecksurvey->value != 'aa7cda56d137325b560dc9d1136e5474d08ff5b9') {
     redirect (new moodle_url('/admin/settings.php?section=managelocalsurvey_intelligence'));
 }
+call_woocomerce_status_intelligence();
+$statussurvey = get_config('local_survey_intelligence', 'status');
+
 
 echo $OUTPUT->header();
 
