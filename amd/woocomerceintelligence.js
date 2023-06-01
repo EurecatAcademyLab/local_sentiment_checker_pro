@@ -36,7 +36,7 @@ function setStatusSurvey(active, url) {
                 url: url,
                 data: {active},
                 success: function(data) {
-                    // console.log(data);
+                    console.log(data);
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     console.log('Error! ' + errorThrown);
@@ -127,6 +127,7 @@ async function woocommerce_api_active_intelligence(yui, apikey, product_id, emai
         xhr.onload = function() {
             if (xhr.status === 200) {
                 var data = xhr.response;
+
                 // handle data
                 console.log('validation Survey Intelligence: ' + data.success);
             } else {
@@ -162,15 +163,14 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
         var data = '';
         email = email.replace(/\s+/g, "");
         if (email.length == 0 || email == '') {
-            console.log('email')
             validateEmailSurvey();
-        } else if (!productid  || productid != 142){
+        } else if (!productid  || productid != getProductIdSurvey()){
             validateProductSurvey();
-        } else if (apikey != 'aa7cda56d137325b560dc9d1136e5474d08ff5b9' || apikey == 0 || apikey == '' || apikey.length == 0){
+        } else if (apikey != getFreeKeySurvey() || apikey == 0 || apikey == '' || apikey.length == 0){
             validateApikeySurvey();
         } else if ( privacy == 0){
             validatePrivacySurvey();
-        } else if (apikey == 'aa7cda56d137325b560dc9d1136e5474d08ff5b9' && productid == 142 && plugin == 'survey_intelligence'){
+        } else if (apikey == getFreeKeySurvey() && productid == getProductIdSurvey() && plugin == 'survey_intelligence'){
             validateApikeySurveyCorrect();
             validateProductSurveyCorrect();
 
@@ -200,6 +200,8 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     var data = xhr.response;
+                    let product_title_survey = data.data.resources[0].product_title
+                    let product_id_survey = data.data.resources[0].product_id
                     const urlSurvey = window.location.href;
                     let urlSettingsSurvey, finalUrlSurvey;
                     if (urlSurvey.indexOf("index") !== -1) {
@@ -210,8 +212,9 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
                         finalUrlSurvey = urlSurvey.replace(/\/admin\/.*$/, '/local/survey_intelligence/classes/settings/savehsurvey.php');
                     }
 
+                    product_id_survey = parseInt(product_id_survey)
                     // handle data
-                    if (data.status_check == 'active') {
+                    if (data.status_check == 'active' && product_title_survey == getProductTitleSurvey() && product_id_survey == getProductIdSurvey()) {
                         var active = 1;
                         sethSurvey(hash, finalUrlSurvey, host)
                         setStatusSurvey(active, urlSettingsSurvey);
@@ -388,4 +391,23 @@ function validatePrivacySurvey() {
             element.parentNode.insertBefore(errorDiv, sibling);
         }
     }
+}
+/**
+ * To get the product title
+ */
+function getProductTitleSurvey() {
+    let name = 'Survey Intelligence Basic';
+    return name;
+}
+/**
+ * To get the Key
+ */
+function getFreeKeySurvey() {
+    return 'aa7cda56d137325b560dc9d1136e5474d08ff5b9';
+}
+/**
+ * To get the product
+ */
+function getProductIdSurvey() {
+    return 142;
 }
