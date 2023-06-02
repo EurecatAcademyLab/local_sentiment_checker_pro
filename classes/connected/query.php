@@ -76,14 +76,16 @@ function call_woocomerce_status_intelligence() {
  * @return Array $data with most of the get config data.
  */
 function get_headers_call_intelligence() {
-    $data = [
+    return   $data = [
+        'name' => get_config('local_survey_intelligence', 'name'),
+        'email' => get_config('local_survey_intelligence', 'email'),
         'apikey' => get_config('local_survey_intelligence', 'apikey'),
         'productid' => get_config('local_survey_intelligence', 'productid'),
-        'email' => get_config('local_survey_intelligence', 'email'),
-        'name' => get_config('local_survey_intelligence', 'name'),
+        'privacy' => get_config('local_survey_intelligence', 'privacy'),
+        'hash' => get_config('local_survey_intelligence', 'hash'),
         'url' => get_config('local_survey_intelligence', 'url'),
-        'instancia' => get_config('local_survey_intelligence', 'instancia'),
+        'status' => get_config('local_survey_intelligence', 'status'),
+        'plugin' => 'survey_intelligence',
     ];
-    return $data;
 }
 

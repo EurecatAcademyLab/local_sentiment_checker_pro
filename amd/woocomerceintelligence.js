@@ -36,7 +36,7 @@ function setStatusSurvey(active, url) {
                 url: url,
                 data: {active},
                 success: function(data) {
-                    console.log(data);
+                    // console.log(data);
                 },
                 error: function(xhr, textStatus, errorThrown) {
                     console.log('Error! ' + errorThrown);
@@ -159,7 +159,6 @@ async function woocommerce_api_active_intelligence(yui, apikey, product_id, emai
  */
 async function woocommerce_api_status_intelligence(yui, apikey, productid, email, plugin, privacy) {
     try {
-
         var data = '';
         email = email.replace(/\s+/g, "");
         if (email.length == 0 || email == '') {
@@ -196,7 +195,6 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
             var xhr = new XMLHttpRequest();
             xhr.open('GET', call_url);
             xhr.responseType = 'json';
-
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     var data = xhr.response;
@@ -213,10 +211,6 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
                     }
 
                     product_id_survey = parseInt(product_id_survey)
-
-                    if (product_id_survey == getProductIdSurvey()) {
-                        
-                    }
                     // handle data
                     if (data.status_check == 'active' && product_title_survey == getProductTitleSurvey() && product_id_survey == getProductIdSurvey()) {
                         var active = 1;
@@ -224,12 +218,10 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
                         setStatusSurvey(active, urlSettingsSurvey);
                         insertIntoDivSurvey('Active User');
                         console.log('Status Survey Intelligence: ' + data.status_check);
-                        console.log('true')
                     } else {
                         var active = 0;
                         setStatusSurvey(active, urlSettingsSurvey);
                         console.log('Status Survey Intelligence: ' + data.status_check);
-                        console.log('false')
                     }
                 }  else {
                     // handle error
@@ -402,18 +394,20 @@ function validatePrivacySurvey() {
  * To get the product title
  */
 function getProductTitleSurvey() {
-    let name = 'Survey Intelligence Basic';
+    let name = 'Survey Intelligence basic';
     return name;
 }
 /**
  * To get the Key
  */
 function getFreeKeySurvey() {
-    return 'aa7cda56d137325b560dc9d1136e5474d08ff5b9';
+    let name = 'aa7cda56d137325b560dc9d1136e5474d08ff5b9';
+    return name;
 }
 /**
  * To get the product
  */
 function getProductIdSurvey() {
-    return 142;
+    let name = 142;
+    return name;
 }

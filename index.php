@@ -152,6 +152,8 @@ if ( $statussurvey == 1 ) {
         $dform->display();
     }
 
+    $data = get_headers_call_intelligence();
+    $output .= var_dump($data);
     $output .= html_header($courseselected);
 
     $output .= html_writer::start_tag('div', ['class' => 'pt-2']);
