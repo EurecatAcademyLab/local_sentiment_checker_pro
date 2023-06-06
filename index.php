@@ -121,6 +121,7 @@ if ( !$apikeychecksurvey || $apikeychecksurvey->value != 'aa7cda56d137325b560dc9
     redirect (new moodle_url('/admin/settings.php?section=managelocalsurvey_intelligence'));
 }
 call_woocomerce_status_intelligence();
+call_woocomerce_status_intelligence();
 $statussurvey = get_config('local_survey_intelligence', 'status');
 
 

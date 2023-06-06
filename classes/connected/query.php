@@ -56,7 +56,7 @@ function call_woocomerce_status_intelligence() {
     $apikey = get_config('local_survey_intelligence', 'apikey');
     $productid = get_config('local_survey_intelligence', 'productid');
     $email = get_config('local_survey_intelligence', 'email');
-    $privacysurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'privacy'));
+    $privacysurvey = get_config('local_survey_intelligence', 'privacy');
     $plugin = 'survey_intelligence';
 
     $data = array(
@@ -64,7 +64,7 @@ function call_woocomerce_status_intelligence() {
         "productid" => $productid,
         'email' => $email,
         'plugin' => $plugin,
-        'privacy' => $privacysurvey->value,
+        'privacy' => $privacysurvey,
     );
     global $PAGE;
     $PAGE->requires->js('/local/survey_intelligence/amd/woocomerceintelligence.js');

@@ -160,10 +160,10 @@ async function woocommerce_api_active_intelligence(yui, apikey, product_id, emai
 async function woocommerce_api_status_intelligence(yui, apikey, productid, email, plugin, privacy) {
     try {
         var data = '';
-        email = email.replace(/\s+/g, "");
+        email = email.toString().replace(/\s+/g, '');
         if (email.length == 0 || email == '') {
             validateEmailSurvey();
-        } else if (!productid  || productid != getProductIdSurvey()){
+        } else if ( productid != getProductIdSurvey()){
             validateProductSurvey();
         } else if (apikey != getFreeKeySurvey() || apikey == 0 || apikey == '' || apikey.length == 0){
             validateApikeySurvey();
@@ -201,6 +201,7 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
                     let product_title_survey = data.data.resources[0].product_title
                     let product_id_survey = data.data.resources[0].product_id
                     const urlSurvey = window.location.href;
+                    console.log()
                     let urlSettingsSurvey, finalUrlSurvey;
                     if (urlSurvey.indexOf("index") !== -1) {
                         urlSettingsSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/settingssurvey.php');
