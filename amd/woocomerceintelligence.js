@@ -47,6 +47,27 @@ function setStatusSurvey(active, url) {
 }
 
 /**
+ * To get the product title
+ */
+function getProductTitleSurvey() {
+    let name = 'Survey Intelligence basic';
+    return name;
+}
+/**
+ * To get the Key
+ */
+function getFreeKeySurvey() {
+    let name = 'aa7cda56d137325b560dc9d1136e5474d08ff5b9';
+    return name;
+}
+/**
+ * To get the product
+ */
+function getProductIdSurvey() {
+    let name = 142;
+    return name;
+}
+/**
  * Documentation for the setH function.
  * This function sends an AJAX request to a specified URL to update the H.
  * @param {string} h - indicate.
@@ -201,7 +222,6 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
                     let product_title_survey = data.data.resources[0].product_title
                     let product_id_survey = data.data.resources[0].product_id
                     const urlSurvey = window.location.href;
-                    console.log()
                     let urlSettingsSurvey, finalUrlSurvey;
                     if (urlSurvey.indexOf("index") !== -1) {
                         urlSettingsSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/settingssurvey.php');
@@ -213,16 +233,17 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
 
                     product_id_survey = parseInt(product_id_survey)
                     // handle data
-                    if (data.status_check == 'active' && product_title_survey == getProductTitleSurvey() && product_id_survey == getProductIdSurvey()) {
+
+                    if (data.status_check == 'active' && product_title_survey == 'Survey Intelligence basic' && product_id_survey == 142) {
                         var active = 1;
                         sethSurvey(hash, finalUrlSurvey, host)
                         setStatusSurvey(active, urlSettingsSurvey);
                         insertIntoDivSurvey('Active User');
-                        console.log('Status Survey Intelligence: ' + data.status_check);
+                        console.log('Status Survey Intelligence T: ' + data.status_check);
                     } else {
                         var active = 0;
                         setStatusSurvey(active, urlSettingsSurvey);
-                        console.log('Status Survey Intelligence: ' + data.status_check);
+                        console.log('Status Survey Intelligence F: ' + data.status_check);
                     }
                 }  else {
                     // handle error
@@ -391,24 +412,4 @@ function validatePrivacySurvey() {
         }
     }
 }
-/**
- * To get the product title
- */
-function getProductTitleSurvey() {
-    let name = 'Survey Intelligence basic';
-    return name;
-}
-/**
- * To get the Key
- */
-function getFreeKeySurvey() {
-    let name = 'aa7cda56d137325b560dc9d1136e5474d08ff5b9';
-    return name;
-}
-/**
- * To get the product
- */
-function getProductIdSurvey() {
-    let name = 142;
-    return name;
-}
+

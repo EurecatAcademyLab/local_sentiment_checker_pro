@@ -129,6 +129,9 @@ $statussurvey = get_config('local_survey_intelligence', 'status');
 echo $OUTPUT->header();
 
 $output = "";
+$output .= $statussurvey;
+call_woocomerce_status_intelligence();
+
 if ( $statussurvey == 1 ) {
 
     $output .= html_writer::start_tag('div', ['id' => 'statusintelligence', 'class' => 'mb-3']);
