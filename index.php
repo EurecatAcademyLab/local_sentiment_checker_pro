@@ -120,18 +120,15 @@ if (!$privacysurvey || $privacysurvey->value == false) {
 if ( !$apikeychecksurvey || $apikeychecksurvey->value != 'aa7cda56d137325b560dc9d1136e5474d08ff5b9') {
     redirect (new moodle_url('/admin/settings.php?section=managelocalsurvey_intelligence'));
 }
-call_woocomerce_status_intelligence();
-call_woocomerce_status_intelligence();
-// $statussurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'status'));
-$statussurvey = get_config('local_survey_intelligence', 'status');
-
 
 echo $OUTPUT->header();
 
 $output = "";
 call_woocomerce_status_intelligence();
+$statussurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'status'));
 
-if ( $statussurvey == 1 ) {
+if ( $statussurvey->value == 1 ) {
+    updatepost();
 
     $output .= html_writer::start_tag('div', ['id' => 'statusintelligence', 'class' => 'mb-3']);
     $output .= html_writer::end_tag('div');
