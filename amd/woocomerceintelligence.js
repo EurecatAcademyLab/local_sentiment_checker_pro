@@ -219,31 +219,39 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     var data = xhr.response;
-                    let product_title_survey = data.data.resources[0].product_title
-                    let product_id_survey = data.data.resources[0].product_id
                     const urlSurvey = window.location.href;
-                    let urlSettingsSurvey, finalUrlSurvey;
+                    let urlSettingsSurvey;
+                    
+                   
                     if (urlSurvey.indexOf("index") !== -1) {
                         urlSettingsSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/settingssurvey.php');
                         finalUrlSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/savehsurvey.php');
-                    } else {
+                    } else if (urlSurvey.indexOf("admin") !== -1) {
                         urlSettingsSurvey = urlSurvey.replace(/\/admin\/.+$/, '/local/survey_intelligence/classes/settings/settingssurvey.php');
-                        finalUrlSurvey = urlSurvey.replace(/\/admin\/.+$/, '/local/survey_intelligence/classes/settings/savehsurvey.php');
+                    } else {
+                        urlSettingsSurvey = urlSurvey + 'classes/settings/settingssurvey.php'
                     }
 
-                    product_id_survey = parseInt(product_id_survey)
-                    // handle data
-
-                    if (data.status_check == 'active' && product_title_survey == 'Survey Intelligence basic' && product_id_survey == 142) {
-                        var active = 1;
-                        sethSurvey(hash, finalUrlSurvey, host)
+                    var active = 0;
+                     if (data.code) {
                         setStatusSurvey(active, urlSettingsSurvey);
-                        insertIntoDivSurvey('Active User');
-                        console.log('Status Survey Intelligence T: ' + data.status_check);
+                        console.log('Status Survey Intelligence False ' ) ;
                     } else {
-                        var active = 0;
-                        setStatusSurvey(active, urlSettingsSurvey);
-                        console.log('Status Survey Intelligence F: ' + data.status_check);
+                        let product_title_survey = data.data.resources[0].product_title
+                        let product_id_survey = data.data.resources[0].product_id
+                        product_id_survey = parseInt(product_id_survey)
+                        // handle data
+
+                        if (data.status_check == 'active' && product_title_survey == 'Survey Intelligence basic' && product_id_survey == 142) {
+                            active = 1;
+                            setStatusSurvey(active, urlSettingsSurvey);
+                            console.log('Status Survey Intelligence T: ' + data.status_check);
+                            insertIntoDivSurvey('Active User');
+                        
+                        } else {
+                            setStatusSurvey(active, urlSettingsSurvey);
+                            console.log('Status Survey Intelligence F: ' + data.status_check);
+                        } 
                     }
                 }  else {
                     // handle error
