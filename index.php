@@ -122,6 +122,7 @@ if ( !$apikeychecksurvey || $apikeychecksurvey->value != 'aa7cda56d137325b560dc9
 }
 call_woocomerce_status_intelligence();
 call_woocomerce_status_intelligence();
+// $statussurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'status'));
 $statussurvey = get_config('local_survey_intelligence', 'status');
 
 
@@ -153,8 +154,6 @@ if ( $statussurvey == 1 ) {
         $dform->display();
     }
 
-    $data = get_headers_call_intelligence();
-    $output .= var_dump($data);
     $output .= html_header($courseselected);
 
     $output .= html_writer::start_tag('div', ['class' => 'pt-2']);
