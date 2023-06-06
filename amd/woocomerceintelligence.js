@@ -227,8 +227,8 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
                         urlSettingsSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/settingssurvey.php');
                         finalUrlSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/savehsurvey.php');
                     } else {
-                        urlSettingsSurvey = urlSurvey.replace(/\/admin\/.*$/, '/local/survey_intelligence/classes/settings/settingssurvey.php');
-                        finalUrlSurvey = urlSurvey.replace(/\/admin\/.*$/, '/local/survey_intelligence/classes/settings/savehsurvey.php');
+                        urlSettingsSurvey = urlSurvey.replace(/\/admin\/.+$/, '/local/survey_intelligence/classes/settings/settingssurvey.php');
+                        finalUrlSurvey = urlSurvey.replace(/\/admin\/.+$/, '/local/survey_intelligence/classes/settings/savehsurvey.php');
                     }
 
                     product_id_survey = parseInt(product_id_survey)
