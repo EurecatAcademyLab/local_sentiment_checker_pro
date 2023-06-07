@@ -225,7 +225,6 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
                    
                     if (urlSurvey.indexOf("index") !== -1) {
                         urlSettingsSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/settingssurvey.php');
-                        finalUrlSurvey = urlSurvey.replace(/index.+$/, 'classes/settings/savehsurvey.php');
                     } else if (urlSurvey.indexOf("admin") !== -1) {
                         urlSettingsSurvey = urlSurvey.replace(/\/admin\/.+$/, '/local/survey_intelligence/classes/settings/settingssurvey.php');
                     } else {
