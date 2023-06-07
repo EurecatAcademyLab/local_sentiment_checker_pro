@@ -184,10 +184,10 @@ async function woocommerce_api_status_intelligence(yui, apikey, productid, email
         email = email.toString().replace(/\s+/g, '');
         if (email.length == 0 || email == '') {
             validateEmailSurvey();
-        } else if ( productid != getProductIdSurvey()){
-            validateProductSurvey();
         } else if (apikey != getFreeKeySurvey() || apikey == 0 || apikey == '' || apikey.length == 0){
             validateApikeySurvey();
+        } else if ( productid != getProductIdSurvey()){
+            validateProductSurvey();
         } else if ( privacy == 0){
             validatePrivacySurvey();
         } else if (apikey == getFreeKeySurvey() && productid == getProductIdSurvey() && plugin == 'survey_intelligence'){
