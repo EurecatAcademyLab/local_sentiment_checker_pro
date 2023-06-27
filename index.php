@@ -203,56 +203,73 @@ if ( $statussurvey->value == 1 ) {
                 $downloadformatselector = str_replace('<button', '<button id="downloadresult" disabled', $downloadformatselector);
                 $output .= $downloadformatselector;
 
-                $img = html_writer::tag('img', '', array(
-                'alt' => get_string('premiumicon', 'local_survey_intelligence'), 'src' => "pix/premiumicon.png", 'height' => 30));
-                $output .= html_writer::start_tag('a',
-                array('href' => 'https://lab.eurecatacademy.org',
-                'target' => '_blank',
-                'style' => 'width: 20%;'));
+                $output .= html_writer::start_tag('div', ['class' => 'tab-pane fade', 'id' => 'si_graph']);
+                $outputgraphs = graphposts($thresholdneg, $thresholdpos , $courseselected);
+                $output .= $outputgraphs;
+            $output .= html_writer::tag('i', '', ['class' => 'fa fa-print']);
+            $output .= html_writer::tag(
+                'a',
+                '  '.
+                get_string('printAnalysis', 'local_survey_intelligence'),
+                [
+                    'href' => '#',
+                    'class' => 'mt-3 ',
+                    'onclick' => 'print()',
+                    'role' => 'button',
+                ]
+            );
+            $output .= html_writer::end_tag('div');
 
-                $output .= html_writer::start_tag('div',
-                ['class' => 'btn rounded ',
-                'style' => 'height: 50px; width: 20%; margin-top:20px;
-                background-image: linear-gradient(to bottom left, #465f9b, #755794, #6d76ae); ']);
-                    $output .= $img;
-                    $output .= html_writer::tag('label', get_string('getpremium', 'local_survey_intelligence'),
-                    ['style' => 'margin-top: 5px; margin-left: 5px;', 'class' => 'text-white']);
-                    $output .= html_writer::end_tag('div');
-                    $output .= html_writer::end_tag('a');
+                // $img = html_writer::tag('img', '', array(
+                // 'alt' => get_string('premiumicon', 'local_survey_intelligence'), 'src' => "pix/premiumicon.png", 'height' => 30));
+                // $output .= html_writer::start_tag('a',
+                // array('href' => 'https://lab.eurecatacademy.org',
+                // 'target' => '_blank',
+                // 'style' => 'width: 20%;'));
+
+                // $output .= html_writer::start_tag('div',
+                // ['class' => 'btn rounded ',
+                // 'style' => 'height: 50px; width: 20%; margin-top:20px;
+                // background-image: linear-gradient(to bottom left, #465f9b, #755794, #6d76ae); ']);
+                //     $output .= $img;
+                //     $output .= html_writer::tag('label', get_string('getpremium', 'local_survey_intelligence'),
+                //     ['style' => 'margin-top: 5px; margin-left: 5px;', 'class' => 'text-white']);
+                //     $output .= html_writer::end_tag('div');
+                //     $output .= html_writer::end_tag('a');
 
 
-                    $output .= html_writer::end_tag('div');
+                //     $output .= html_writer::end_tag('div');
 
-                    $output .= html_writer::start_tag('div', ['class' => 'tab-pane fade', 'id' => 'si_graph']);
-                    $output .= html_writer::start_tag('div');
-                    $output .= $premium->definition();
-                    $output .= html_writer::end_tag('div');
+                //     $output .= html_writer::start_tag('div', ['class' => 'tab-pane fade', 'id' => 'si_graph']);
+                //     $output .= html_writer::start_tag('div');
+                //     $output .= $premium->definition();
+                //     $output .= html_writer::end_tag('div');
 
-                    $output .= html_writer::start_tag('div', [
-                        'class' => 'd-flex justify-content-center align-items-center overflow-hidden mt-6 border']);
-                    $output .= html_writer::empty_tag('img',
-                    array('src' => "pix/sapostgraph.png",
-                    'style' => 'width: 100%',
-                    'class' => 'd-flex justify-content-center align-items-center'));
-                    $output .= html_writer::end_tag('div');
+                //     $output .= html_writer::start_tag('div', [
+                //         'class' => 'd-flex justify-content-center align-items-center overflow-hidden mt-6 border']);
+                //     $output .= html_writer::empty_tag('img',
+                //     array('src' => "pix/sapostgraph.png",
+                //     'style' => 'width: 100%',
+                //     'class' => 'd-flex justify-content-center align-items-center'));
+                //     $output .= html_writer::end_tag('div');
 
-                    $output .= html_writer::start_tag('div');
-                    $output .= html_writer::tag('i', '', ['class' => 'fa fa-print']);
-                    $output .= html_writer::tag(
-                        'a',
-                        '  '.
-                        get_string('printAnalysis', 'local_survey_intelligence'),
-                        [
-                            'href' => '#',
-                            'id' => 'printAnalysis',
-                            'class' => 'mt-3',
-                            'role' => 'button',
-                        ]
-                    );
-                    $output .= html_writer::end_tag('div');
+                //     $output .= html_writer::start_tag('div');
+                //     $output .= html_writer::tag('i', '', ['class' => 'fa fa-print']);
+                //     $output .= html_writer::tag(
+                //         'a',
+                //         '  '.
+                //         get_string('printAnalysis', 'local_survey_intelligence'),
+                //         [
+                //             'href' => '#',
+                //             'id' => 'printAnalysis',
+                //             'class' => 'mt-3',
+                //             'role' => 'button',
+                //         ]
+                //     );
+                //     $output .= html_writer::end_tag('div');
 
-                    $output .= html_writer::end_tag('div');
-                    $output .= html_writer::end_tag('div');
+                //     $output .= html_writer::end_tag('div');
+                //     $output .= html_writer::end_tag('div');
 
                     $output .= html_writer::start_tag('div', ['class' => 'tab-pane fade', 'id' => 'si_about']);
                             $output .= $about->definition();

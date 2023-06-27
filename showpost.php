@@ -221,7 +221,7 @@ class Post_view {
      */
     public function addclass($string, $thresholdneg, $thresholdpos) {
         $doc = new DOMDocument();
-        @$doc->loadHTML(($string), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $doc->loadHTML(($string), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $ps = $doc->getElementsByTagName('p');
         foreach ($ps as $p) {
             $num = (float)$p->getAttribute('data-value');
