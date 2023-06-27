@@ -53,7 +53,10 @@ function getposts($lastmodified, $maxnum) {
             $posts[$value->id]->modified = $value->modified;
             $posts[$value->id]->idpost = $value->id;
         }
+
+        print_object($posts);
         $polarityresults = processposts(array_filter($posts));
+        print_object($polarityresults);
         call_user_func_array("addtodb", array((array) $posts, $polarityresults));
         return true;
     }
@@ -93,6 +96,8 @@ function addtodb($postsarr, $polarityresults) {
         $post->language = $polarityresults[$post->idpost]["language"];
         $post->textpolarity = $polarityresults[$post->idpost]["text"];
         $post->translation = $polarityresults[$post->idpost]["translation"];
+
+        // print_object($post);
 
         if ($DB->record_exists($table, ['idpost' => $post->idpost])) {
             $post->id = $DB->get_field($table, 'id', ['idpost' => $post->idpost]);
@@ -190,10 +195,10 @@ function callapi($method, $url, $data) {
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_HTTPHEADER, array(
        'APIKEY: '.get_config('local_survey_intelligence', 'apikey'),
-       'Productid:' . get_config('local_survey_intelligence', 'productid'),
-       'instancia:' . get_config('local_survey_intelligence', 'instancia'),
-       'email:' . get_config('local_survey_intelligence', 'email'),
-       'name:' . get_config('local_survey_intelligence', 'name'),
+    //    'Productid:' . get_config('local_survey_intelligence', 'productid'),
+    //    'instancia:' . get_config('local_survey_intelligence', 'instancia'),
+    //    'email:' . get_config('local_survey_intelligence', 'email'),
+    //    'name:' . get_config('local_survey_intelligence', 'name'),
        'Content-Type: application/json',
     ));
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);

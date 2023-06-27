@@ -130,6 +130,8 @@ $statussurvey = $DB->get_record('config_plugins', array('plugin' => 'local_surve
 
 if ( $statussurvey->value == 1 ) {
     updatepost();
+    // $toprint = updatepost();
+    // print_object($toprint);
 
     $output .= html_writer::start_tag('div', ['id' => 'statusintelligence', 'class' => 'mb-3']);
     $output .= html_writer::end_tag('div');
@@ -180,29 +182,31 @@ if ( $statussurvey->value == 1 ) {
 
                 $output .= html_writer::end_tag('ul');
                 $output .= html_writer::end_tag('div');
+                $output .= html_writer::end_tag('div');
 
                 $output .= html_writer::start_tag('div', ['class' => 'tab-content']);
+
                 $output .= html_writer::start_tag('div', ['class' => 'tab-pane fade show active', 'id' => 'postsTab']);
                 $output .= html_writer::start_tag('div', ['class' => 'p-1']);
                     $post = new Post_view($thresholdneg, $thresholdpos, $courseselected, $onlybad, $translation);
                     $output .= utf8_decode($post->printar());
                 $output .= html_writer::end_tag('div');
 
-                $downloadformatselector = $OUTPUT->download_dataformat_selector(
-                    get_string('userbulkdownload', 'admin'),
-                    'downloadposts.php',
-                    'download',
-                    array(
-                        'id' => 'downloadresult',
-                        'thN' => $thresholdneg,
-                        'curseSelected' => $courseselected,
-                        'onlyB' => $onlybad,
-                        'disablecontrols' => true
-                    )
-                );
+                // $downloadformatselector = $OUTPUT->download_dataformat_selector(
+                //     get_string('userbulkdownload', 'admin'),
+                //     'downloadposts.php',
+                //     'download',
+                //     array(
+                //         'id' => 'downloadresult',
+                //         'thN' => $thresholdneg,
+                //         'curseSelected' => $courseselected,
+                //         'onlyB' => $onlybad,
+                //         'disablecontrols' => true
+                //     )
+                // );
 
-                $downloadformatselector = str_replace('<button', '<button id="downloadresult" disabled', $downloadformatselector);
-                $output .= $downloadformatselector;
+                // $downloadformatselector = str_replace('<button', '<button id="downloadresult" disabled', $downloadformatselector);
+                // $output .= $downloadformatselector;
 
                 $output .= html_writer::end_tag('div');
                 $output .= html_writer::end_tag('div');
@@ -212,19 +216,20 @@ if ( $statussurvey->value == 1 ) {
                 $output .= html_writer::start_tag('div', ['class' => 'tab-pane fade', 'id' => 'si_graph']);
                 $outputgraphs = graphposts($thresholdneg, $thresholdpos , $courseselected);
                 $output .= $outputgraphs;
-            $output .= html_writer::tag('i', '', ['class' => 'fa fa-print']);
-            $output .= html_writer::tag(
-                'a',
-                '  '.
-                get_string('printAnalysis', 'local_survey_intelligence'),
-                [
-                    'href' => '#',
-                    'class' => 'mt-3 ',
-                    'onclick' => 'print()',
-                    'role' => 'button',
-                ]
-            );
-            $output .= html_writer::end_tag('div');
+                $output .= html_writer::tag('i', '', ['class' => 'fa fa-print']);
+                $output .= html_writer::tag(
+                    'a',
+                    '  '.
+                    get_string('printAnalysis', 'local_survey_intelligence'),
+                    [
+                        'href' => '#',
+                        'class' => 'mt-3 ',
+                        'onclick' => 'print()',
+                        'role' => 'button',
+                    ]
+                );
+                $output .= html_writer::end_tag('div');
+
             $output .= html_writer::end_tag('div');
             $output .= html_writer::end_tag('div');
 
