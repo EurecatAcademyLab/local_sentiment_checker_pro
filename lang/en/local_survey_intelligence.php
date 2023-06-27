@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Sentiment checker';
-$string['pluginnameextra'] = '(Free version / Beta)';
+$string['pluginnameextra'] = '(Pro / Beta)';
 
 $string['Analysis'] = 'Analysis';
 $string['Graphs'] = 'Graphs';

@@ -34,6 +34,7 @@ require_once('./showfbq.php');
 require_once('./selectorforms.php');
 require_once('./sqlquery.php');
 require_once('./header.php');
+require_once('./graphs.php');
 
 require_once($CFG->dirroot. '/local/survey_intelligence/classes/form/premiumformintelligence.php');
 require_once($CFG->dirroot. '/local/survey_intelligence/classes/form/noactivesurvey.php');
@@ -203,6 +204,11 @@ if ( $statussurvey->value == 1 ) {
                 $downloadformatselector = str_replace('<button', '<button id="downloadresult" disabled', $downloadformatselector);
                 $output .= $downloadformatselector;
 
+                $output .= html_writer::end_tag('div');
+                $output .= html_writer::end_tag('div');
+                $output .= html_writer::end_tag('div');
+
+
                 $output .= html_writer::start_tag('div', ['class' => 'tab-pane fade', 'id' => 'si_graph']);
                 $outputgraphs = graphposts($thresholdneg, $thresholdpos , $courseselected);
                 $output .= $outputgraphs;
@@ -218,6 +224,8 @@ if ( $statussurvey->value == 1 ) {
                     'role' => 'button',
                 ]
             );
+            $output .= html_writer::end_tag('div');
+            $output .= html_writer::end_tag('div');
             $output .= html_writer::end_tag('div');
 
                 // $img = html_writer::tag('img', '', array(
