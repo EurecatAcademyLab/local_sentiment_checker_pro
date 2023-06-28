@@ -54,9 +54,9 @@ function getposts($lastmodified, $maxnum) {
             $posts[$value->id]->idpost = $value->id;
         }
 
-        print_object($posts);
+        // print_object($posts);
         $polarityresults = processposts(array_filter($posts));
-        print_object($polarityresults);
+        // print_object($polarityresults);
         call_user_func_array("addtodb", array((array) $posts, $polarityresults));
         return true;
     }
