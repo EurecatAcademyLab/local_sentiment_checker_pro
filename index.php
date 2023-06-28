@@ -34,6 +34,7 @@ require_once('./showfbq.php');
 require_once('./selectorforms.php');
 require_once('./sqlquery.php');
 require_once('./header.php');
+require_once('./graphs.php');
 
 require_once($CFG->dirroot. '/local/survey_intelligence/classes/form/premiumformintelligence.php');
 require_once($CFG->dirroot. '/local/survey_intelligence/classes/form/noactivesurvey.php');
@@ -129,6 +130,8 @@ $statussurvey = $DB->get_record('config_plugins', array('plugin' => 'local_surve
 
 if ( $statussurvey->value == 1 ) {
     updatepost();
+    // $toprint = updatepost();
+    // print_object($toprint);
 
     $output .= html_writer::start_tag('div', ['id' => 'statusintelligence', 'class' => 'mb-3']);
     $output .= html_writer::end_tag('div');
@@ -179,80 +182,43 @@ if ( $statussurvey->value == 1 ) {
 
                 $output .= html_writer::end_tag('ul');
                 $output .= html_writer::end_tag('div');
+                // $output .= html_writer::end_tag('div');
 
                 $output .= html_writer::start_tag('div', ['class' => 'tab-content']);
+
                 $output .= html_writer::start_tag('div', ['class' => 'tab-pane fade show active', 'id' => 'postsTab']);
                 $output .= html_writer::start_tag('div', ['class' => 'p-1']);
                     $post = new Post_view($thresholdneg, $thresholdpos, $courseselected, $onlybad, $translation);
                     $output .= utf8_decode($post->printar());
                 $output .= html_writer::end_tag('div');
 
-                $downloadformatselector = $OUTPUT->download_dataformat_selector(
+                $output .= $OUTPUT->download_dataformat_selector(
                     get_string('userbulkdownload', 'admin'),
                     'downloadposts.php',
                     'download',
-                    array(
-                        'id' => 'downloadresult',
-                        'thN' => $thresholdneg,
-                        'curseSelected' => $courseselected,
-                        'onlyB' => $onlybad,
-                        'disablecontrols' => true
-                    )
+                    array('thN' => $thresholdneg, 'curseSelected' => $courseselected, 'onlyB' => $onlybad));
+
+
+                $output .= html_writer::end_tag('div');
+
+
+                $output .= html_writer::start_tag('div', ['class' => 'tab-pane fade', 'id' => 'si_graph']);
+                $outputgraphs = graphposts($thresholdneg, $thresholdpos , $courseselected);
+                $output .= $outputgraphs;
+                $output .= html_writer::tag('i', '', ['class' => 'fa fa-print']);
+                $output .= html_writer::tag(
+                    'a',
+                    '  '.
+                    get_string('printAnalysis', 'local_survey_intelligence'),
+                    [
+                        'href' => '#',
+                        'class' => 'mt-3 ',
+                        'onclick' => 'print()',
+                        'role' => 'button',
+                    ]
                 );
+                $output .= html_writer::end_tag('div');
 
-                $downloadformatselector = str_replace('<button', '<button id="downloadresult" disabled', $downloadformatselector);
-                $output .= $downloadformatselector;
-
-                $img = html_writer::tag('img', '', array(
-                'alt' => get_string('premiumicon', 'local_survey_intelligence'), 'src' => "pix/premiumicon.png", 'height' => 30));
-                $output .= html_writer::start_tag('a',
-                array('href' => 'https://lab.eurecatacademy.org',
-                'target' => '_blank',
-                'style' => 'width: 20%;'));
-
-                $output .= html_writer::start_tag('div',
-                ['class' => 'btn rounded ',
-                'style' => 'height: 50px; width: 20%; margin-top:20px;
-                background-image: linear-gradient(to bottom left, #465f9b, #755794, #6d76ae); ']);
-                    $output .= $img;
-                    $output .= html_writer::tag('label', get_string('getpremium', 'local_survey_intelligence'),
-                    ['style' => 'margin-top: 5px; margin-left: 5px;', 'class' => 'text-white']);
-                    $output .= html_writer::end_tag('div');
-                    $output .= html_writer::end_tag('a');
-
-
-                    $output .= html_writer::end_tag('div');
-
-                    $output .= html_writer::start_tag('div', ['class' => 'tab-pane fade', 'id' => 'si_graph']);
-                    $output .= html_writer::start_tag('div');
-                    $output .= $premium->definition();
-                    $output .= html_writer::end_tag('div');
-
-                    $output .= html_writer::start_tag('div', [
-                        'class' => 'd-flex justify-content-center align-items-center overflow-hidden mt-6 border']);
-                    $output .= html_writer::empty_tag('img',
-                    array('src' => "pix/sapostgraph.png",
-                    'style' => 'width: 100%',
-                    'class' => 'd-flex justify-content-center align-items-center'));
-                    $output .= html_writer::end_tag('div');
-
-                    $output .= html_writer::start_tag('div');
-                    $output .= html_writer::tag('i', '', ['class' => 'fa fa-print']);
-                    $output .= html_writer::tag(
-                        'a',
-                        '  '.
-                        get_string('printAnalysis', 'local_survey_intelligence'),
-                        [
-                            'href' => '#',
-                            'id' => 'printAnalysis',
-                            'class' => 'mt-3',
-                            'role' => 'button',
-                        ]
-                    );
-                    $output .= html_writer::end_tag('div');
-
-                    $output .= html_writer::end_tag('div');
-                    $output .= html_writer::end_tag('div');
 
                     $output .= html_writer::start_tag('div', ['class' => 'tab-pane fade', 'id' => 'si_about']);
                             $output .= $about->definition();

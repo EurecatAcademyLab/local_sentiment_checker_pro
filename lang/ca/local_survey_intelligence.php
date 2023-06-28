@@ -25,8 +25,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = "Anàlisi d'Enquestes";
-$string['pluginnameextra'] = '(Versió gratuïta / Beta)';
+$string['pluginname'] = "Cercador de sentiment";
+$string['pluginnameextra'] = '(Pro/ Beta)';
 
 $string['Analysis'] = 'Anàlisi';
 $string['Graphs'] = 'Gràfics';
