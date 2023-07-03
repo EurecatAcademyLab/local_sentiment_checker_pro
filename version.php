@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_sentiment_checker';
 $plugin->requires = 2021051700;
-$plugin->version = 2023051500;
+$plugin->version = 2023051700;
 $plugin->release = "0.1.2";
 $plugin->maturity = MATURITY_ALPHA;
 

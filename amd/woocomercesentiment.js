@@ -237,7 +237,7 @@ async function woocommerce_api_status_sentiment(yui, apikey, productid, email, p
                     var active = 0;
                     if (data.code) {
                         setStatusSentiment(active, urlSettingsSentiment);
-                        if (currentURLSentiment.endsWith("section=managelocalsentiment_checker")) {
+                        if (currentURLSentiment.endsWith("section=managelocalsentiment_checker") || currentURLSentiment.endsWith("local/sentiment_checker/index.php")) {
                             // handle data
                             console.log('Status Sentiment Checker False' ) ;
                         }
@@ -250,7 +250,7 @@ async function woocommerce_api_status_sentiment(yui, apikey, productid, email, p
                         if (data.status_check == 'active' && product_title_Sentiment == 'Sentiment Checker Pro' && product_id_Sentiment == 197) {
                             active = 1;
                             setStatusSentiment(active, urlSettingsSentiment);
-                            if (currentURLSentiment.endsWith("section=managelocalsentiment_checker")) {
+                            if (currentURLSentiment.endsWith("section=managelocalsentiment_checker") || currentURLSentiment.endsWith("local/sentiment_checker/index.php")) {
                                 // handle data
                                 console.log('Status Sentiment Checker T: ' + data.status_check);
                             }
@@ -258,7 +258,7 @@ async function woocommerce_api_status_sentiment(yui, apikey, productid, email, p
                         
                         } else {
                             setStatusSentiment(active, urlSettingsSentiment);
-                            if (currentURLSentiment.endsWith("section=managelocalsentiment_checker")) {
+                            if (currentURLSentiment.endsWith("section=managelocalsentiment_checker") || currentURLSentiment.endsWith("local/sentiment_checker/index.php")) {
                                 // handle data
                                 console.log('Status Sentiment Checker F: ' + data.status_check);
                             }
