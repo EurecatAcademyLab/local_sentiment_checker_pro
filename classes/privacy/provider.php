@@ -17,7 +17,7 @@
 /**
  * Privacy Provider.
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2023 Aina Palacios, Laia Subirats, Magali Lescano, Alvaro Martin, JuanCarlo Castillo, Santi Fort
  * @copyright   2022 Eurecat.org <dev.academy@eurecat.org>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -66,7 +66,7 @@ class provider implements
                 'translation' => 'privacy:metadata:translation',
                 'idpost' => 'privacy:metadata:idpost',
                 'language' => 'privacy:metadata:language',
-            ], 'privacy:metadata:localsurvey_intelligenceforumpost');
+            ], 'privacy:metadata:localsentiment_checkerforumpost');
         $collection->add_database_table('local_si_feedback', [
             'message' => 'privacy:metadata:message',
             'modified' => 'privacy:metadata:modified',
@@ -76,7 +76,7 @@ class provider implements
             'value' => 'privacy:metadata:value',
             'label' => 'privacy:metadata:label',
             'feedback_name' => 'privacy:metadata:feedbackname',
-            ], 'privacy:metadata:localsurvey_intelligencefeedback');
+            ], 'privacy:metadata:localsentiment_checkerfeedback');
         return $collection;
     }
 

@@ -17,7 +17,7 @@
 /**
  * Connected before plugins.
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2023 Aina Palacios, Laia Subirats, Magali Lescano, Alvaro Martin, JuanCarlo Castillo, Santi Fort
  * @copyright   2022 Eurecat.org <dev.academy@eurecat.org>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,38 +26,38 @@
 defined('MOODLE_INTERNAL') || die();
 
 $page = new moodle_page();
-$page->requires->js('/local/survey_intelligence/amd/woocomerceintelligence.js');
+$page->requires->js('/local/sentiment_checker/amd/woocomercesentiment.js');
 
 /**
  * This function get data from config settings and connect with js function.
  * @return Void.
  */
-function call_woocomerce_intelligence() {
+function call_woocomerce_sentiment() {
 
-    $apikey = get_config('local_survey_intelligence', 'apikey');
-    $productid = get_config('local_survey_intelligence', 'productid');
-    $email = get_config('local_survey_intelligence', 'email');
+    $apikey = get_config('local_sentiment_checker', 'apikey');
+    $productid = get_config('local_sentiment_checker', 'productid');
+    $email = get_config('local_sentiment_checker', 'email');
 
     $data = array("apikey" => $apikey, "productid" => $productid, 'email' => $email);
     global $PAGE;
-    $PAGE->requires->js('/local/survey_intelligence/amd/woocomerceintelligence.js');
-    $PAGE->requires->js_init_call('woocommerce_api_active_intelligence', $data);
-    call_woocomerce_status_intelligence();
-    call_woocomerce_status_intelligence();
+    $PAGE->requires->js('/local/sentiment_checker/amd/woocomercesentiment.js');
+    $PAGE->requires->js_init_call('woocommerce_api_active_sentiment', $data);
+    call_woocomerce_status_sentiment();
+    call_woocomerce_status_sentiment();
 }
 
 /**
  * This function get data from config settings and confirm the status.
  * @return Void.
  */
-function call_woocomerce_status_intelligence() {
+function call_woocomerce_status_sentiment() {
     global $DB;
 
-    $apikey = get_config('local_survey_intelligence', 'apikey');
-    $productid = get_config('local_survey_intelligence', 'productid');
-    $email = get_config('local_survey_intelligence', 'email');
-    $privacysurvey = get_config('local_survey_intelligence', 'privacy');
-    $plugin = 'survey_intelligence';
+    $apikey = get_config('local_sentiment_checker', 'apikey');
+    $productid = get_config('local_sentiment_checker', 'productid');
+    $email = get_config('local_sentiment_checker', 'email');
+    $privacysurvey = get_config('local_sentiment_checker', 'privacy');
+    $plugin = 'sentiment_checker';
 
     $data = array(
         "apikey" => $apikey,
@@ -67,25 +67,25 @@ function call_woocomerce_status_intelligence() {
         'privacy' => $privacysurvey,
     );
     global $PAGE;
-    $PAGE->requires->js('/local/survey_intelligence/amd/woocomerceintelligence.js');
-    $PAGE->requires->js_init_call('woocommerce_api_status_intelligence', $data);
+    $PAGE->requires->js('/local/sentiment_checker/amd/woocomercesentiment.js');
+    $PAGE->requires->js_init_call('woocommerce_api_status_sentiment', $data);
 }
 
 /**
  * This function get data the table config plugins and get some values
  * @return Array $data with most of the get config data.
  */
-function get_headers_call_intelligence() {
+function get_headers_call_sentiment() {
     return   $data = [
-        'name' => get_config('local_survey_intelligence', 'name'),
-        'email' => get_config('local_survey_intelligence', 'email'),
-        'apikey' => get_config('local_survey_intelligence', 'apikey'),
-        'productid' => get_config('local_survey_intelligence', 'productid'),
-        'privacy' => get_config('local_survey_intelligence', 'privacy'),
-        'hash' => get_config('local_survey_intelligence', 'hash'),
-        'url' => get_config('local_survey_intelligence', 'url'),
-        'status' => get_config('local_survey_intelligence', 'status'),
-        'plugin' => 'survey_intelligence',
+        'name' => get_config('local_sentiment_checker', 'name'),
+        'email' => get_config('local_sentiment_checker', 'email'),
+        'apikey' => get_config('local_sentiment_checker', 'apikey'),
+        'productid' => get_config('local_sentiment_checker', 'productid'),
+        'privacy' => get_config('local_sentiment_checker', 'privacy'),
+        'hash' => get_config('local_sentiment_checker', 'hash'),
+        'url' => get_config('local_sentiment_checker', 'url'),
+        'status' => get_config('local_sentiment_checker', 'status'),
+        'plugin' => 'sentiment_checker',
     ];
 }
 

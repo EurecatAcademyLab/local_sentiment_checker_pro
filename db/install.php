@@ -17,7 +17,7 @@
 /**
  * DB install.
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2023 Aina Palacios, Laia Subirats, Magali Lescano, Alvaro Martin, JuanCarlo Castillo, Santi Fort
  * @copyright   2022 Eurecat.org <dev.academy@eurecat.org>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,13 +26,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
-require_once($CFG->dirroot . '/local/survey_intelligence/forumposts.php');
+require_once($CFG->dirroot . '/local/sentiment_checker/forumposts.php');
 
 /**
  * To update data from table.
  * @return Void .
  */
-function xmldb_local_survey_intelligence_install() {
+function xmldb_local_sentiment_checker_install() {
     $postupdate = true;
 
     do {

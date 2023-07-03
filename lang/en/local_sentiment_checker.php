@@ -17,7 +17,7 @@
 /**
  * Plugin strings are defined here. English.
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2023 Aina Palacios, Laia Subirats, Magali Lescano, Alvaro Martin, JuanCarlo Castillo, Santi Fort
  * @copyright   2022 Eurecat.org <dev.academy@eurecat.org>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -108,13 +108,13 @@ $string['privacy:metadata:textpolarity'] = 'Polarity of message';
 $string['privacy:metadata:translation'] = 'In case to translate to english';
 $string['privacy:metadata:idpost'] = 'Post by user';
 $string['privacy:metadata:language'] = 'Language user detected';
-$string['privacy:metadata:localsurvey_intelligenceforumpost'] = 'Saved information for user';
+$string['privacy:metadata:localsentiment_checkerforumpost'] = 'Saved information for user';
 $string['privacy:metadata:anonymus'] = 'To display anonymous user';
 $string['privacy:metadata:courseid'] = 'User course';
 $string['privacy:metadata:value'] = 'Value';
 $string['privacy:metadata:label'] = 'Label';
 $string['privacy:metadata:feedbackname'] = '';
-$string['privacy:metadata:localsurvey_intelligencefeedback'] = 'Saved data from user';
+$string['privacy:metadata:localsentiment_checkerfeedback'] = 'Saved data from user';
 
 // Settings.
 $string['email'] = 'Email';

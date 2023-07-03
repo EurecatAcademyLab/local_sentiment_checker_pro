@@ -17,7 +17,7 @@
 /**
  * Plugin strings are defined here. Spanish.
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2023 Aina Palacios, Laia Subirats, Magali Lescano, Alvaro Martin, JuanCarlo Castillo, Santi Fort
  * @copyright   2022 Eurecat.org <dev.academy@eurecat.org>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -108,13 +108,13 @@ $string['privacy:metadata:textpolarity'] = 'Polaridad del mensaje';
 $string['privacy:metadata:translation'] = 'En caso de traducir al español';
 $string['privacy:metadata:idpost'] = 'Publicado por el usuario';
 $string['privacy:metadata:language'] = 'Idioma del usuario detectado';
-$string['privacy:metadata:localsurvey_intelligenceforumpost'] = 'Información guardada para el usuario';
+$string['privacy:metadata:localsentiment_checkerforumpost'] = 'Información guardada para el usuario';
 $string['privacy:metadata:anonymus'] = 'Para mostrar usuario anónimo';
 $string['privacy:metadata:courseid'] = 'Curso de usuario';
 $string['privacy:metadata:value'] = 'Valor';
 $string['privacy:metadata:label'] = 'Etiqueta';
 $string['privacy:metadata:feedbackname'] = '';
-$string['privacy:metadata:localsurvey_intelligencefeedback'] = 'Datos guardados del usuario';
+$string['privacy:metadata:localsentiment_checkerfeedback'] = 'Datos guardados del usuario';
 
 // Settings.
 $string['email'] = 'Correo electrónico';

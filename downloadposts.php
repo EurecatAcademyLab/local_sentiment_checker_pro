@@ -17,7 +17,7 @@
 /**
  * To download post information.
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2023 Aina Palacios, Laia Subirats, Magali Lescano, Alvaro Martin, JuanCarlo Castillo, Santi Fort
  * @copyright   2022 Eurecat.org <dev.academy@eurecat.org>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -41,14 +41,14 @@ $onlybad = required_param('onlyB', PARAM_BOOL);
 // ... id_post, user, message, messange_translation discussion, polarity, language, class_id, class_name.
 $columns = array(
     'id_post' => get_string('idnumber'),
-    'name' => get_string('name', 'local_survey_intelligence'),
-    'message' => get_string('message', 'local_survey_intelligence'),
-    'message_trans' => get_string('message_trans', 'local_survey_intelligence'),
-    'polarity' => get_string('polarity', 'local_survey_intelligence'),
-    'language' => get_string('language', 'local_survey_intelligence'),
-    'discussion' => get_string('discussion', 'local_survey_intelligence'),
-    'class_id' => get_string('class_id', 'local_survey_intelligence'),
-    'class_name' => get_string('class_name', 'local_survey_intelligence')
+    'name' => get_string('name', 'local_sentiment_checker'),
+    'message' => get_string('message', 'local_sentiment_checker'),
+    'message_trans' => get_string('message_trans', 'local_sentiment_checker'),
+    'polarity' => get_string('polarity', 'local_sentiment_checker'),
+    'language' => get_string('language', 'local_sentiment_checker'),
+    'discussion' => get_string('discussion', 'local_sentiment_checker'),
+    'class_id' => get_string('class_id', 'local_sentiment_checker'),
+    'class_name' => get_string('class_name', 'local_sentiment_checker')
 );
 
 $sql = "SELECT c.idpost as id_post, CONCAT(u.firstname , ' ', u.lastname) as name,

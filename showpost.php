@@ -17,7 +17,7 @@
 /**
  * Show post on table.
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2023 Aina Palacios, Laia Subirats, Magali Lescano, Alvaro Martin, JuanCarlo Castillo, Santi Fort
  * @copyright   2022 Eurecat.org <dev.academy@eurecat.org>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -97,22 +97,22 @@ class Post_view {
         $sortida .= html_writer::start_tag('thead');
         $sortida .= html_writer::start_tag('tr');
         $sortida .= html_writer::tag('th', '', ['class' => 'col-1']);
-        $sortida .= html_writer::tag('th', get_string('name', 'local_survey_intelligence'), ['class' => 'col-3 pl-4']);
-        $sortida .= html_writer::tag('th', get_string('discussion', 'local_survey_intelligence'), ['class' => 'col-4 pl-4']);
+        $sortida .= html_writer::tag('th', get_string('name', 'local_sentiment_checker'), ['class' => 'col-3 pl-4']);
+        $sortida .= html_writer::tag('th', get_string('discussion', 'local_sentiment_checker'), ['class' => 'col-4 pl-4']);
         $sortida .= html_writer::start_tag('th', ['class' => 'col-3 pl-4']);
-        $sortida .= html_writer::tag('span', get_string('polarity', 'local_survey_intelligence').' / ');
-        $sortida .= html_writer::tag('span', get_string('language', 'local_survey_intelligence'));
+        $sortida .= html_writer::tag('span', get_string('polarity', 'local_sentiment_checker').' / ');
+        $sortida .= html_writer::tag('span', get_string('language', 'local_sentiment_checker'));
 
         $sortida .= html_writer::end_tag('th');
         $sortida .= html_writer::start_tag('th', ['class' => 'col-1 pl-4']);
         $htmlcontent = '<div class="no-overflow">
-            <b>'.get_string('name', 'local_survey_intelligence').': </b>'.get_string('name_des', 'local_survey_intelligence').'<br>
-            <b>'.get_string('discussion', 'local_survey_intelligence').
-            ': </b>'.get_string('discussion_des', 'local_survey_intelligence').'<br>
-            <b>'.get_string('polarity', 'local_survey_intelligence').
-            ': </b>'.get_string('polarity_des', 'local_survey_intelligence').'<br>
-            <b>'.get_string('language', 'local_survey_intelligence').
-            ': </b>'.get_string('language_des', 'local_survey_intelligence').'<br>
+            <b>'.get_string('name', 'local_sentiment_checker').': </b>'.get_string('name_des', 'local_sentiment_checker').'<br>
+            <b>'.get_string('discussion', 'local_sentiment_checker').
+            ': </b>'.get_string('discussion_des', 'local_sentiment_checker').'<br>
+            <b>'.get_string('polarity', 'local_sentiment_checker').
+            ': </b>'.get_string('polarity_des', 'local_sentiment_checker').'<br>
+            <b>'.get_string('language', 'local_sentiment_checker').
+            ': </b>'.get_string('language_des', 'local_sentiment_checker').'<br>
             </div>';
         $sortida .= html_writer::start_tag('a', [
             'class' => 'btn btn-link p-0',
@@ -152,14 +152,14 @@ class Post_view {
             $sortida .= html_writer::tag('i', '', ['class' => 'col-1 fa fa-chevron-down pull-right']);
 
             // Name.
-            $name = get_name_user_intelligence($value->userid);
+            $name = get_name_user_sentiment($value->userid);
             if (is_object($name)) {
                 $sortida .= html_writer::tag('a', utf8_encode($name->name), [
                     'class' => 'col-3',
                     'href' => $route.'/user/profile.php?id='.$value->userid
                 ]);
             } else {
-                $sortida .= html_writer::tag('a', get_string('notFound', 'local_survey_intelligence'), ['class' => 'col-3' ]);
+                $sortida .= html_writer::tag('a', get_string('notFound', 'local_sentiment_checker'), ['class' => 'col-3' ]);
             }
 
             // Discuss.
@@ -177,8 +177,8 @@ class Post_view {
 
             // Polarity and language.
             $sortida .= html_writer::tag('span',
-            '<b>'.get_string('polarity', 'local_survey_intelligence').':</b>'.number_format((float)$value->polarity, 2, '.', '').
-            '&emsp;<b>'.get_string('language', 'local_survey_intelligence').':</b>'.$value->language
+            '<b>'.get_string('polarity', 'local_sentiment_checker').':</b>'.number_format((float)$value->polarity, 2, '.', '').
+            '&emsp;<b>'.get_string('language', 'local_sentiment_checker').':</b>'.$value->language
             , ['class' => 'col-3']);
 
             $sortida .= html_writer::end_tag('div');

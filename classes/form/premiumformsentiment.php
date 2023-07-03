@@ -17,7 +17,7 @@
 /**
  * Display information about all the local_group_generator in the requested course.
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2022 JuanCarlo Castillo <juancarlo.castillo20@gmail.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @copyright   2022 JuanCa Castillo & Eurecat.dev
@@ -47,7 +47,7 @@ class si_premium_form extends moodleform {
         $url = 'https://lab.eurecatacademy.org';
 
         $output .= html_writer::start_tag('div', ['class' => 'd-flex justify-content-center mt-3']);
-        $output .= html_writer::tag('h4', get_string('premium', 'local_survey_intelligence'));
+        $output .= html_writer::tag('h4', get_string('premium', 'local_sentiment_checker'));
         $output .= html_writer::end_tag('div');
 
         $output .= html_writer::start_tag('div', ['class' => 'd-flex justify-content-center mt-4']);
@@ -55,7 +55,7 @@ class si_premium_form extends moodleform {
         ['style' => 'background-image: linear-gradient(to bottom left, #465f9b, #755794, #6d76ae);',
         'class' => 'border mt-5 flex-column rounded pt-4 pb-3 w-100']);
         $output .= html_writer::tag('h4',
-            get_string('premium', 'local_survey_intelligence'),
+            get_string('premium', 'local_sentiment_checker'),
             array('class' => 'titol d-flex justify-content-center text-light font-weight-normal mb-4'));
 
         $output .= html_writer::start_tag('div', ['class' => 'row']);
@@ -65,15 +65,15 @@ class si_premium_form extends moodleform {
         $output .= html_writer::start_tag('ul');
 
             $output .= html_writer::start_tag('li', array('style' => 'list-style-type: none;'));
-            $output .= html_writer::tag('p', get_string('nopubli', 'local_survey_intelligence'), ['class' => 'text-light']);
+            $output .= html_writer::tag('p', get_string('nopubli', 'local_sentiment_checker'), ['class' => 'text-light']);
             $output .= html_writer::end_tag('li');
 
             $output .= html_writer::start_tag('li', array('style' => 'list-style-type: none;'));
-            $output .= html_writer::tag('p', get_string('keepquarentine', 'local_survey_intelligence'), ['class' => 'text-light']);
+            $output .= html_writer::tag('p', get_string('keepquarentine', 'local_sentiment_checker'), ['class' => 'text-light']);
             $output .= html_writer::end_tag('li');
 
             $output .= html_writer::start_tag('li', array('style' => 'list-style-type: none;'));
-            $output .= html_writer::tag('p', get_string('removequarentine', 'local_survey_intelligence'),
+            $output .= html_writer::tag('p', get_string('removequarentine', 'local_sentiment_checker'),
             ['class' => 'text-light']);
             $output .= html_writer::end_tag('li');
 
@@ -86,12 +86,12 @@ class si_premium_form extends moodleform {
         $output .= html_writer::start_tag('ul');
 
             $output .= html_writer::start_tag('li', array('style' => 'list-style-type: none;'));
-            $output .= html_writer::tag('p', get_string('desblockanalytic', 'local_survey_intelligence'),
+            $output .= html_writer::tag('p', get_string('desblockanalytic', 'local_sentiment_checker'),
             ['class' => 'text-light']);
             $output .= html_writer::end_tag('li');
 
             $output .= html_writer::start_tag('li', array('style' => 'list-style-type: none;'));
-            $output .= html_writer::tag('p', get_string('exportdata', 'local_survey_intelligence'), ['class' => 'text-light']);
+            $output .= html_writer::tag('p', get_string('exportdata', 'local_sentiment_checker'), ['class' => 'text-light']);
             $output .= html_writer::end_tag('li');
 
         $output .= html_writer::end_tag('ul');
@@ -101,7 +101,7 @@ class si_premium_form extends moodleform {
         $output .= html_writer::start_tag('div', ['class' => 'd-flex justify-content-center mt-3 mx-5']);
         $options = ['class' => 'hatebtn', 'target' => '_blank'];
             $output .= $OUTPUT->single_button($url,
-                get_string('premiumpage', 'local_survey_intelligence'), 'post', $options);
+                get_string('premiumpage', 'local_sentiment_checker'), 'post', $options);
         $output .= html_writer::end_tag('div');
         $output .= html_writer::end_tag('div');
         $output .= html_writer::end_tag('div');
