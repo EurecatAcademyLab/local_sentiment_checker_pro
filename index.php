@@ -37,7 +37,7 @@ require_once('./graphs.php');
 
 require_once($CFG->dirroot. '/local/sentiment_checker/classes/form/premiumformsentiment.php');
 require_once($CFG->dirroot. '/local/sentiment_checker/classes/form/noactivesentiment.php');
-require_once($CFG->dirroot. '/local/sentiment_checker/classes/form/about.php');
+require_once($CFG->dirroot. '/local/sentiment_checker/classes/form/aboutsentiment.php');
 require_once($CFG->dirroot. '/local/sentiment_checker/classes/connected/query.php');
 
 require_login();
@@ -117,7 +117,7 @@ if (!$productsentiment || $productsentiment->value != 197 ) {
 if (!$privacysentiment || $privacysentiment->value == false) {
     redirect (new moodle_url('/admin/settings.php?section=managelocalsentiment_checker'));
 }
-if ( !$apikeychecksentiment || $apikeychecksentiment->value != get_api()) {
+if ( !$apikeychecksentiment || $apikeychecksentiment->value != get_api_sentiment()) {
     redirect (new moodle_url('/admin/settings.php?section=managelocalsentiment_checker'));
 }
 
