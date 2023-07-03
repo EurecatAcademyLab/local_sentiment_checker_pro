@@ -54,9 +54,7 @@ function getposts($lastmodified, $maxnum) {
             $posts[$value->id]->idpost = $value->id;
         }
 
-        // print_object($posts);
         $polarityresults = processposts(array_filter($posts));
-        // print_object($polarityresults);
         call_user_func_array("addtodb", array((array) $posts, $polarityresults));
         return true;
     }
@@ -90,14 +88,12 @@ function processposts($postsarr) {
  */
 function addtodb($postsarr, $polarityresults) {
     global $DB;
-    $table = "local_si_forumpost";
+    $table = "local_sc_forumpost";
     foreach ($postsarr as $post) {
         $post->polarity = $polarityresults[$post->idpost]["polarity"];
         $post->language = $polarityresults[$post->idpost]["language"];
         $post->textpolarity = $polarityresults[$post->idpost]["text"];
         $post->translation = $polarityresults[$post->idpost]["translation"];
-
-        // print_object($post);
 
         if ($DB->record_exists($table, ['idpost' => $post->idpost])) {
             $post->id = $DB->get_field($table, 'id', ['idpost' => $post->idpost]);
@@ -115,7 +111,7 @@ function addtodb($postsarr, $polarityresults) {
 function deleteerrors() {
     global $DB;
     $conditions = ['polarity' => null];
-    $table = "local_si_forumpost";
+    $table = "local_sc_forumpost";
     $DB->delete_records($table, $conditions);
 }
 
@@ -126,7 +122,7 @@ function deleteerrors() {
 function deleteall() {
     global $DB;
     $conditions = null;
-    $table = "local_si_forumpost";
+    $table = "local_sc_forumpost";
     $DB->delete_records($table, $conditions);
 }
 
@@ -136,7 +132,7 @@ function deleteall() {
  */
 function updatepost() {
     global $DB;
-    $lastmodified = $DB->get_records_sql("SELECT MAX(modified) AS lastModified FROM {local_si_forumpost}");
+    $lastmodified = $DB->get_records_sql("SELECT MAX(modified) AS lastModified FROM {local_sc_forumpost}");
     if (reset($lastmodified)->lastmodified == null) {
         $lastmodified = 0;
     } else {
@@ -152,7 +148,7 @@ function updatepost() {
 function checkerrors() {
     global $DB;
     $repes = array_fill(0, 500, 0);
-    $rd = $DB->get_recordset('local_si_forumpost',
+    $rd = $DB->get_recordset('local_sc_forumpost',
     null, $sort = 'modified', $fields = '*', $limitfrom = 0, $limitnum = 0);
     $k = 0;
     foreach ($rd as $key => $value) {
@@ -195,10 +191,6 @@ function callapi($method, $url, $data) {
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_HTTPHEADER, array(
        'APIKEY: '.get_config('local_sentiment_checker', 'apikey'),
-    //    'Productid:' . get_config('local_sentiment_checker', 'productid'),
-    //    'instancia:' . get_config('local_sentiment_checker', 'instancia'),
-    //    'email:' . get_config('local_sentiment_checker', 'email'),
-    //    'name:' . get_config('local_sentiment_checker', 'name'),
        'Content-Type: application/json',
     ));
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);

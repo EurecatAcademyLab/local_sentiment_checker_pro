@@ -121,3 +121,10 @@ class si_about_form extends moodleform {
     }
 }
 
+/**
+ * You know.
+ * @return String
+ */
+function get_api() {
+    return '1d7ff265efb59b5b12ad2b6716155c2f378afafa';
+}

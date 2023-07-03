@@ -57,7 +57,7 @@ function getProductTitleSentiment() {
  * To get the Key
  */
 function getFreeKeySentiment() {
-    let name = 'aa7cda56d137325b560dc9d1136e5474d08ff5b9';
+    let name = '82a56cb1632bf35d874d8e3b9c7c219df0f0ff83';
     return name;
 }
 /**
@@ -123,7 +123,7 @@ async function woocommerce_api_active_sentiment(yui, apikey, product_id, email) 
         let finalUrlSentiment = newUrl + '/local/sentiment_checker/classes/settings/savehSentiment.php'
 
         const urlactualSentimentChecker = new URL(window.location.href);
-        const host = urlactualSentiment.host;
+        const host = urlactualSentimentChecker.host;
         const hash = await hashString(host + 'Sentiment');
 
         sethSentiment(hash, finalUrlSentiment, host);
@@ -148,9 +148,11 @@ async function woocommerce_api_active_sentiment(yui, apikey, product_id, email) 
         xhr.onload = function() {
             if (xhr.status === 200) {
                 var data = xhr.response;
-
+                var currentURLSentiment = window.location.href;
+                if (currentURLSentiment.endsWith("section=managelocalsentiment_checker")) {
                 // handle data
-                console.log('validation Sentiment Checker: ' + data.success);
+                console.log('validation Sentiment Checker: ' + data.success); 
+                }
             } else {
                 // handle error
                 console.error('Error getting data from API endpoint');
@@ -230,25 +232,36 @@ async function woocommerce_api_status_sentiment(yui, apikey, productid, email, p
                         urlSettingsSentiment = urlSentiment + 'classes/settings/settingsSentiment.php'
                     }
 
+
+                    var currentURLSentiment = window.location.href;
                     var active = 0;
                     if (data.code) {
                         setStatusSentiment(active, urlSettingsSentiment);
-                        console.log('Status Sentiment SentimentFalse ' ) ;
+                        if (currentURLSentiment.endsWith("section=managelocalsentiment_checker")) {
+                            // handle data
+                            console.log('Status Sentiment Checker False' ) ;
+                        }
                     } else {
                         let product_title_Sentiment = data.data.resources[0].product_title
                         let product_id_Sentiment = data.data.resources[0].product_id
                         product_id_Sentiment = parseInt(product_id_Sentiment)
                         // handle data
 
-                        if (data.status_check == 'active' && product_title_Sentiment == 'Sentiment Sentimentbasic' && product_id_Sentiment == 142) {
+                        if (data.status_check == 'active' && product_title_Sentiment == 'Sentiment Checker Pro' && product_id_Sentiment == 197) {
                             active = 1;
                             setStatusSentiment(active, urlSettingsSentiment);
-                            console.log('Status Sentiment Checker T: ' + data.status_check);
+                            if (currentURLSentiment.endsWith("section=managelocalsentiment_checker")) {
+                                // handle data
+                                console.log('Status Sentiment Checker T: ' + data.status_check);
+                            }
                             insertIntoDivSentiment('Active User');
                         
                         } else {
                             setStatusSentiment(active, urlSettingsSentiment);
-                            console.log('Status Sentiment Checker F: ' + data.status_check);
+                            if (currentURLSentiment.endsWith("section=managelocalsentiment_checker")) {
+                                // handle data
+                                console.log('Status Sentiment Checker F: ' + data.status_check);
+                            }
                         } 
                     }
                 }  else {

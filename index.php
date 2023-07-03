@@ -101,37 +101,36 @@ $premium = new si_premium_form();
 $about = new si_about_form();
 $noactivesurvey = new noactive_survey_form();
 
-$privacysurvey = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'privacy'));
-$apikeychecksurvey = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'apikey'));
-$emailsurvey = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'email'));
-$productsurvey = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'productid'));
+$privacysentiment = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'privacy'));
+$apikeychecksentiment = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'apikey'));
+$emailsentiment = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'email'));
+$productsentiment = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'productid'));
 
 
-if (empty($emailsurvey) || strlen($emailsurvey->value) == 0 ||
-$emailsurvey->value == '' || $emailsurvey->value == null || !$emailsurvey) {
+if (empty($emailsentiment) || strlen($emailsentiment->value) == 0 ||
+$emailsentiment->value == '' || $emailsentiment->value == null || !$emailsentiment) {
     redirect (new moodle_url('/admin/settings.php?section=managelocalsentiment_checker'));
 }
-if (!$productsurvey || $productsurvey->value != 142 ) {
+if (!$productsentiment || $productsentiment->value != 197 ) {
     redirect (new moodle_url('/admin/settings.php?section=managelocalsentiment_checker'));
 }
-if (!$privacysurvey || $privacysurvey->value == false) {
+if (!$privacysentiment || $privacysentiment->value == false) {
     redirect (new moodle_url('/admin/settings.php?section=managelocalsentiment_checker'));
 }
-if ( !$apikeychecksurvey || $apikeychecksurvey->value != 'aa7cda56d137325b560dc9d1136e5474d08ff5b9') {
+if ( !$apikeychecksentiment || $apikeychecksentiment->value != get_api()) {
     redirect (new moodle_url('/admin/settings.php?section=managelocalsentiment_checker'));
 }
 
 echo $OUTPUT->header();
 
 $output = "";
-call_woocomerce_status_intelligence();
-// $statussurvey = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'status'));
+call_woocomerce_status_sentiment();
+$statussentiment = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'status'));
 
-$statussurvey = 1;
-if ( $statussurvey == 1 ) {
+if ( $statussentiment->value == 1 ) {
     updatepost();
 
-    $output .= html_writer::start_tag('div', ['id' => 'statusintelligence', 'class' => 'mb-3']);
+    $output .= html_writer::start_tag('div', ['id' => 'statussentiment', 'class' => 'mb-3']);
     $output .= html_writer::end_tag('div');
 
     $courseselected = null;
@@ -180,7 +179,6 @@ if ( $statussurvey == 1 ) {
 
                 $output .= html_writer::end_tag('ul');
                 $output .= html_writer::end_tag('div');
-                // $output .= html_writer::end_tag('div');
 
                 $output .= html_writer::start_tag('div', ['class' => 'tab-content']);
 
@@ -195,7 +193,6 @@ if ( $statussurvey == 1 ) {
                     'downloadposts.php',
                     'download',
                     array('thN' => $thresholdneg, 'curseSelected' => $courseselected, 'onlyB' => $onlybad));
-
 
                 $output .= html_writer::end_tag('div');
 

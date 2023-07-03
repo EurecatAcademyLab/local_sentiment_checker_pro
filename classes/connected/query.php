@@ -56,7 +56,8 @@ function call_woocomerce_status_sentiment() {
     $apikey = get_config('local_sentiment_checker', 'apikey');
     $productid = get_config('local_sentiment_checker', 'productid');
     $email = get_config('local_sentiment_checker', 'email');
-    $privacysurvey = get_config('local_sentiment_checker', 'privacy');
+    $privacysentiment = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'privacy'));
+
     $plugin = 'sentiment_checker';
 
     $data = array(
@@ -64,7 +65,7 @@ function call_woocomerce_status_sentiment() {
         "productid" => $productid,
         'email' => $email,
         'plugin' => $plugin,
-        'privacy' => $privacysurvey,
+        'privacy' => $privacysentiment
     );
     global $PAGE;
     $PAGE->requires->js('/local/sentiment_checker/amd/woocomercesentiment.js');

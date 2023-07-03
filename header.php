@@ -43,7 +43,7 @@ function html_header($courseselected) {
             $output .= html_writer::tag('hr', '');
             $output .= html_writer::tag(
                 'span',
-                get_string('course', 'local_sentiment_checker') . get_name_course_intelligence($courseselected)->name,
+                get_string('course', 'local_sentiment_checker') . get_name_course_sentiment($courseselected)->name,
                 ['class' => 'h1 p-3 center']);
             $output .= html_writer::start_tag('a', ['href' => $CFG->wwwroot.'/course/view.php?id='.$courseselected]);
             $output .= html_writer::tag('i', '', ['class' => 'fa fa-link p-1']);

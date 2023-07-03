@@ -121,9 +121,9 @@ $string['email'] = 'Correo electrónico';
 $string['email_des'] = 'Ingrese su correo';
 $string['productid'] = 'Identificador de producto';
 $string['productid_des'] = 'Su producto actual';
-$string['manage'] = 'Análisis de encuestas';
+$string['manage'] = 'Sentiment Checker';
 $string['showinnavigation'] = 'Mostrar navegación';
-$string['showinnavigation_desc'] = 'Cuando se active, la navegación del sitio mostrará un enlace al Inteligencia de Encuestas';
+$string['showinnavigation_desc'] = 'Cuando se active, la navegación del sitio mostrará un enlace al Sentiment Checker';
 $string['apikey'] = 'APIKey';
 $string['apikey_des'] = 'Inserte la clave APIKey';
 $string['name'] = 'Apellido';
@@ -136,7 +136,7 @@ $string['activate'] = 'Activar';
 
 // Description.
 $string['Describ'] = "Sobre aquest plugin";
-$string['Describtion'] = "El plugin utiliza el procesamiento del lenguaje natural (PLN) para extraer la sugerencia de las respuestas abiertas en las encuestas de calidad. Esto permite obtener información más precisa a partir de las respuestas de los usuarios a las preguntas abiertas que los valores medios habituales calculados únicamente a partir de datos cuantitativos.";
+$string['Describtion'] = "El plugin utiliza el procesamiento del lenguaje natural (PLN) para extraer la sugerencia de las respuestas abiertas en los forum de calidad. Esto permite obtener información más precisa a partir de las respuestas de los usuarios a las preguntas abiertas que los valores medios habituales calculados únicamente a partir de datos cuantitativos.";
 
 $string['more'] = "Com funciona";
 $string['moreinfo'] = "Para representar los Posts analizados de forma sencilla y gráfica, hemos creado un Plugin local que puede ser instalado en cualquier plataforma Moodle. Lee automáticamente la base de datos cada vez que lo usamos, y muestra los posts en orden de modificación/creación. el módulo lee los posts automáticamente en un proceso en segundo plano que evitará la necesidad de cargar el programa para leer los nuevos posts.";
@@ -186,7 +186,7 @@ $string['eurecat'] = "Eurecat Academy";
 $string['eurecatorg'] = "Eurecat.org";
 
 // Premium.
-$string['premium'] = '* Actualizar a la versión Premium -  Análisis de Encuestas';
+$string['premium'] = '* Actualizar a la versión Premium -  Sentiment Checker';
 $string['premiumpage'] = 'Eurecat.Lab';
 $string['keepquarentine'] = '* Añadir la posibilidad de cambiar el umbral negativo';
 $string['removequarentine'] = '* Añadir la posibilidad de cambiar el umbral positivo';

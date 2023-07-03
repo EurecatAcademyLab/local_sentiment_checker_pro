@@ -54,7 +54,7 @@ $columns = array(
 $sql = "SELECT c.idpost as id_post, CONCAT(u.firstname , ' ', u.lastname) as name,
     c.message as message, c.translation as message_trans, c.polarity as polarity,
     c.language as language, fd.name as discussion, course.id as class_id, course.fullname as class_name
-    FROM {local_si_forumpost} c
+    FROM {local_sc_forumpost} c
     JOIN {forum_discussions} fd on fd.id = c.discussion
     JOIN {user} u on u.id = c.userid
     JOIN {course} course on course.id = fd.course";

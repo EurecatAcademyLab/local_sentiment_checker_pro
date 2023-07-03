@@ -220,9 +220,6 @@ class Post_view {
      * @return String | Bolean.
      */
     public function addclass($string, $thresholdneg, $thresholdpos) {
-        // if (empty($string)) {
-        //     return ''; 
-        // }
 
         $doc = new DOMDocument();
         $doc->loadHTML(($string), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);

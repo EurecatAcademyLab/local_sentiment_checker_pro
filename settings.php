@@ -100,7 +100,7 @@ if ($hassiteconfig) {
             'local_sentiment_checker/apikey',
             new lang_string('apikey', 'local_sentiment_checker'),
             new lang_string('apikey_des', 'local_sentiment_checker'),
-            'aa7cda56d137325b560dc9d1136e5474d08ff5b9',
+            null,
             PARAM_TEXT,
             50,
             'maxlength="50"readonly'
@@ -114,7 +114,7 @@ if ($hassiteconfig) {
         'local_sentiment_checker/productid',
         new lang_string('productid', 'local_sentiment_checker'),
         new lang_string('productid_des', 'local_sentiment_checker'),
-        142,
+        null,
         PARAM_INT);
 
         $settingspage->add($productidsettingssentiment);

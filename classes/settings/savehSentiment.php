@@ -58,7 +58,6 @@ if ($urlrecord) {
     $DB->insert_record('config_plugins', $urlrecord);
 }
 
-// 
 $status = $DB->get_record('config_plugins', array('plugin' => $plugin, 'name' => 'status'));
 
 if ($status) {
