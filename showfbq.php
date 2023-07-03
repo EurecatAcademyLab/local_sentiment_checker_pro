@@ -155,6 +155,10 @@ class Feedback_view {
             utf8_encode($namediscuss->name),
             ['href' => $route.'/mod/forum/discuss.php?d='.$num, 'class' => 'col-4 font-weight-bold', 'target' => '_blank']);
 
+            $output .= html_writer::tag('p',
+            utf8_encode($namediscuss->name),
+            ['href' => $route.'/mod/forum/discuss.php?d='.$num, 'class' => 'col-4 font-weight-bold', 'target' => '_blank']);
+
             // Polarity and language.
             $output .= html_writer::tag('span',
             '<b>'.get_string('polarity', 'local_survey_intelligence').':</b>'.number_format((float)$value->polarity, 2, '.', '').

@@ -126,9 +126,10 @@ echo $OUTPUT->header();
 
 $output = "";
 call_woocomerce_status_intelligence();
-$statussurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'status'));
+// $statussurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'status'));
 
-if ( $statussurvey->value == 1 ) {
+$statussurvey = 1;
+if ( $statussurvey == 1 ) {
     updatepost();
     // $toprint = updatepost();
     // print_object($toprint);

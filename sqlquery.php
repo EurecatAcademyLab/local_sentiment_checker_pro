@@ -129,23 +129,27 @@ function get_name_discussion_by_id($id) {
  * @return Object .
  */
 function get_mean_from_course($courseid) {
+    // print_object($courseid);
+    // var_dump($courseid);
     global $DB;
-
+    
     $mean = [];
     $params = ['courseid' => $courseid];
     if (is_null($courseid) || $courseid == 0) {
         $sql = "SELECT id, Avg(polarity) AS mean
         FROM {local_si_forumpost}";
         $mean = $DB->get_record_sql($sql);
-
+        
     } else {
+        $courseid = intval($courseid);
+        var_dump($courseid);
         $sql = "SELECT fd.course, Avg(c.polarity) AS mean
         FROM {local_si_forumpost} c
         JOIN {forum_discussions} fd ON fd.id = c.discussion
-        WHERE fd.course = :courseid
-        GROUP BY id
+        WHERE fd.course = $courseid
+        GROUP BY fd.id
         ";
-        $mean = $DB->get_record_sql($sql, $params);
+        $mean = $DB->get_record_sql($sql);
     }
 
     return $mean;
