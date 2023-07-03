@@ -17,7 +17,7 @@
 /**
  * Save hash on settings
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2023 Aina Palacios, Laia Subirats, Magali Lescano, Alvaro Martin, JuanCarlo Castillo, Santi Fort
  * @copyright   2022 Eurecat.org <dev.academy@eurecat.org>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -28,7 +28,7 @@ require_login();
 
 $url = optional_param('host', null, PARAM_TEXT);
 $h = optional_param('h', null, PARAM_TEXT);
-$plugin = 'local_survey_intelligence';
+$plugin = 'local_sentiment_checker';
 
 // Update or insert 'hash' record.
 $hashrecord = $DB->get_record('config_plugins', array('plugin' => $plugin, 'name' => 'hash'));
@@ -58,7 +58,6 @@ if ($urlrecord) {
     $DB->insert_record('config_plugins', $urlrecord);
 }
 
-// 
 $status = $DB->get_record('config_plugins', array('plugin' => $plugin, 'name' => 'status'));
 
 if ($status) {

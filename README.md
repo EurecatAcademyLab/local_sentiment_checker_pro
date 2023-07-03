@@ -1,4 +1,4 @@
-# survey_intelligence
+# sentiment_checker
 
 Describe the plugin.
 
@@ -37,7 +37,7 @@ It also shows a pie chart of the number of charts in the different languages as 
 
 The plugin can be also installed by putting the contents of this directory to
 
-    {your/moodle/dirroot}/local/survey_intelligence
+    {your/moodle/dirroot}/local/sentiment_checker
 
 Afterwards, log in to your Moodle site as an admin and go to _Site administration >
 Notifications_ to complete the installation.

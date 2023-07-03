@@ -17,7 +17,7 @@
 /**
  * To choose a course on header.
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2023 Aina Palacios, Laia Subirats, Magali Lescano, Alvaro Martin, JuanCarlo Castillo, Santi Fort
  * @copyright   2022 Eurecat.org <dev.academy@eurecat.org>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -43,7 +43,7 @@ function html_header($courseselected) {
             $output .= html_writer::tag('hr', '');
             $output .= html_writer::tag(
                 'span',
-                get_string('course', 'local_survey_intelligence') . get_name_course_intelligence($courseselected)->name,
+                get_string('course', 'local_sentiment_checker') . get_name_course_sentiment($courseselected)->name,
                 ['class' => 'h1 p-3 center']);
             $output .= html_writer::start_tag('a', ['href' => $CFG->wwwroot.'/course/view.php?id='.$courseselected]);
             $output .= html_writer::tag('i', '', ['class' => 'fa fa-link p-1']);

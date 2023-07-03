@@ -17,7 +17,7 @@
 /**
  * Plugin strings are defined here. English.
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2023 Aina Palacios, Laia Subirats, Magali Lescano, Alvaro Martin, JuanCarlo Castillo, Santi Fort
  * @copyright   2022 Eurecat.org <dev.academy@eurecat.org>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -108,20 +108,20 @@ $string['privacy:metadata:textpolarity'] = 'Polarity of message';
 $string['privacy:metadata:translation'] = 'In case to translate to english';
 $string['privacy:metadata:idpost'] = 'Post by user';
 $string['privacy:metadata:language'] = 'Language user detected';
-$string['privacy:metadata:localsurvey_intelligenceforumpost'] = 'Saved information for user';
+$string['privacy:metadata:localsentiment_checkerforumpost'] = 'Saved information for user';
 $string['privacy:metadata:anonymus'] = 'To display anonymous user';
 $string['privacy:metadata:courseid'] = 'User course';
 $string['privacy:metadata:value'] = 'Value';
 $string['privacy:metadata:label'] = 'Label';
 $string['privacy:metadata:feedbackname'] = '';
-$string['privacy:metadata:localsurvey_intelligencefeedback'] = 'Saved data from user';
+$string['privacy:metadata:localsentiment_checkerfeedback'] = 'Saved data from user';
 
 // Settings.
 $string['email'] = 'Email';
 $string['email_des'] = 'Insert the Email';
 $string['productid'] = 'Product id';
 $string['productid_des'] = 'Your actual Product id';
-$string['manage'] = 'Survey Intelligence';
+$string['manage'] = 'Sentiment Checker';
 $string['showinnavigation'] = 'Show navegation';
 $string['showinnavigation_desc'] = 'When enabled, the site navegation will display a link to Sentiment Analysis';
 $string['apikey'] = 'APIKey';
@@ -137,7 +137,7 @@ $string['placeholder_text'] = 'name@example.com';
 
 // Description.
 $string['Describ'] = "About this plugin";
-$string['Describtion'] = "The plugin uses natural language processing (NLP) to extract the suggestiveness of open answers on quality surveys. This allows more refined information distilled from user answers to open questions than the usual mean values calculated using quantitative inputs only.";
+$string['Describtion'] = "The plugin uses natural language processing (NLP) to extract the suggestiveness of open answers on quality forums. This allows more refined information distilled from user answers to open questions than the usual mean values calculated using quantitative inputs only.";
 
 $string['more'] = "How it works";
 $string['moreinfo'] = "In order to represent the analyzed Posts in a simple and graphical way, we have created a local Plugin that can be installed on any Moodle platform. It automatically reads the database every time we use it, and displays the posts in order of modification/creation. the module reads the posts  automatically in a background process that will avoid the need to load the program to read the new posts.";
@@ -187,7 +187,7 @@ $string['eurecat'] = "Eurecat Academy";
 $string['eurecatorg'] = "Eurecat.org";
 
 // Premium.
-$string['premium'] = '* Upgrade to Survey Intelligence - Premium';
+$string['premium'] = '* Upgrade to Sentiment Checker - Premium';
 $string['premiumpage'] = 'Eurecat.Lab';
 $string['keepquarentine'] = '* Add the posibility to change negative the threshold';
 $string['removequarentine'] = '* Add the posibility to change positive the threshold';

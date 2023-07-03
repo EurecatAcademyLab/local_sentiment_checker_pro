@@ -17,7 +17,7 @@
 /**
  * DB upgrade.
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2023 Aina Palacios, Laia Subirats, Magali Lescano, Alvaro Martin, JuanCarlo Castillo, Santi Fort
  * @copyright   2022 Eurecat.org <dev.academy@eurecat.org>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -29,13 +29,13 @@
  *
  * @param int $oldversion Version number the plugin is being upgraded from.
  */
-function xmldb_local_survey_intelligence_upgrade($oldversion) {
+function xmldb_local_sentiment_checker_upgrade($oldversion) {
 
     if ($oldversion < 2022060500) {
         // Here goes the code that needs to be executed.
-        set_config('foo', 'bar', 'local_survey_intelligence');
+        set_config('foo', 'bar', 'local_sentiment_checker');
 
-        upgrade_plugin_savepoint(true, 2022060500, 'local', 'survey_intelligence');
+        upgrade_plugin_savepoint(true, 2022060500, 'local', 'sentiment_checker');
     }
 
     return true;

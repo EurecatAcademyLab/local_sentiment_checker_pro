@@ -17,7 +17,7 @@
 /**
  * Auxiliary function.
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2023 Aina Palacios, Laia Subirats, Magali Lescano, Alvaro Martin, JuanCarlo Castillo, Santi Fort
  * @copyright   2022 Eurecat.org <dev.academy@eurecat.org>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -59,13 +59,13 @@ function get_post_from_course($courseid) {
 
         $posts = $DB->get_records_sql(
             "SELECT *
-            FROM {local_si_forumpost}
+            FROM {local_sc_forumpost}
             ORDER BY modified DESC;"
         );
 
     } else {
         $sql = "SELECT c.*
-        FROM {local_si_forumpost} c
+        FROM {local_sc_forumpost} c
         JOIN {forum_discussions} fd ON fd.id = c.discussion
         WHERE fd.course = :courseid
         ORDER BY c.modified DESC";
@@ -92,13 +92,13 @@ function get_post_from_course_neg_threshold($courseid, $thresholdneg) {
 
     if (is_null($courseid) || $courseid == 0) {
         $sql = "SELECT c.*
-        FROM {local_si_forumpost} c
+        FROM {local_sc_forumpost} c
         WHERE c.polarity < :thresholdneg
         ORDER BY c.modified DESC";
         $posts = $DB->get_records_sql($sql, $params);
     } else {
         $sql = "SELECT c.*
-        FROM {local_si_forumpost} c
+        FROM {local_sc_forumpost} c
         JOIN {forum_discussions} fd ON fd.id = c.discussion
         WHERE fd.course = :courseid AND c.polarity < :thresholdneg
         ORDER BY c.modified DESC";
@@ -129,22 +129,18 @@ function get_name_discussion_by_id($id) {
  * @return Object .
  */
 function get_mean_from_course($courseid) {
-    // print_object($courseid);
-    // var_dump($courseid);
     global $DB;
-    
+
     $mean = [];
     $params = ['courseid' => $courseid];
     if (is_null($courseid) || $courseid == 0) {
         $sql = "SELECT id, Avg(polarity) AS mean
-        FROM {local_si_forumpost}";
+        FROM {local_sc_forumpost}";
         $mean = $DB->get_record_sql($sql);
-        
     } else {
         $courseid = intval($courseid);
-        var_dump($courseid);
         $sql = "SELECT fd.course, Avg(c.polarity) AS mean
-        FROM {local_si_forumpost} c
+        FROM {local_sc_forumpost} c
         JOIN {forum_discussions} fd ON fd.id = c.discussion
         WHERE fd.course = $courseid
         GROUP BY fd.id
@@ -159,7 +155,7 @@ function get_mean_from_course($courseid) {
  * @param Mixed $userid .
  * @return Object .
  */
-function get_name_user_intelligence($userid) {
+function get_name_user_sentiment($userid) {
     global $DB;
 
     $sql = "SELECT lastname AS name FROM {user} WHERE id = :userid";
@@ -173,7 +169,7 @@ function get_name_user_intelligence($userid) {
  * @param Mixed $courseid .
  * @return Object .
  */
-function get_name_course_intelligence($courseid) {
+function get_name_course_sentiment($courseid) {
     global $DB;
     $sql = "SELECT c.fullname AS name FROM {course} c WHERE c.id = :courseid";
     $params = ['courseid' => $courseid];

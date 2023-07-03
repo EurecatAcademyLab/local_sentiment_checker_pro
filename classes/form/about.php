@@ -17,7 +17,7 @@
 /**
  * About us - Eurecat dev
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2023 Aina Palacios, Laia Subirats, Magali Lescano, Alvaro Martin, JuanCarlo Castillo, Santi Fort
  * @copyright   2022 Eurecat.org <dev.academy@eurecat.org>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -45,56 +45,56 @@ class si_about_form extends moodleform {
         $output = '';
         // Start with the object form.
         $lab = 'https://lab.eurecatacademy.org';
-        $eurecat = '<a href="'.$lab.'" target="_blank">'.get_string('eurecat', 'local_survey_intelligence').'</a>';
+        $eurecat = '<a href="'.$lab.'" target="_blank">'.get_string('eurecat', 'local_sentiment_checker').'</a>';
 
         $output .= html_writer::start_tag('div', ['class' => 'mt-5 d-flex']);
-            $output .= html_writer::tag('h4', get_string('developed', 'local_survey_intelligence').' '.$eurecat);
+            $output .= html_writer::tag('h4', get_string('developed', 'local_sentiment_checker').' '.$eurecat);
             $output .= html_writer::empty_tag('img', array('src' => "pix/eurecat_academy_logo.png", 'style' => 'width: 5%'));
         $output .= html_writer::end_tag('div');
 
         $output .= html_writer::start_tag('div');
 
-            $output .= html_writer::tag('h5', get_string('Describ', 'local_survey_intelligence'), ['class' => 'mt-5']);
-            $output .= html_writer::tag('p', get_string('Describtion', 'local_survey_intelligence'));
+            $output .= html_writer::tag('h5', get_string('Describ', 'local_sentiment_checker'), ['class' => 'mt-5']);
+            $output .= html_writer::tag('p', get_string('Describtion', 'local_sentiment_checker'));
 
-            $output .= html_writer::tag('h6', get_string('more', 'local_survey_intelligence'), ['class' => 'mt-3']);
-            $output .= html_writer::tag('p', get_string('moreinfo', 'local_survey_intelligence'));
-            $output .= html_writer::tag('p', get_string('moreinfo1', 'local_survey_intelligence'));
-            $output .= html_writer::tag('p', get_string('moreinfo2', 'local_survey_intelligence'));
-            $output .= html_writer::tag('p', get_string('moreinfo3', 'local_survey_intelligence'));
-            $output .= html_writer::tag('p', get_string('moreinfo4', 'local_survey_intelligence'), ['class' => 'mb-3']);
+            $output .= html_writer::tag('h6', get_string('more', 'local_sentiment_checker'), ['class' => 'mt-3']);
+            $output .= html_writer::tag('p', get_string('moreinfo', 'local_sentiment_checker'));
+            $output .= html_writer::tag('p', get_string('moreinfo1', 'local_sentiment_checker'));
+            $output .= html_writer::tag('p', get_string('moreinfo2', 'local_sentiment_checker'));
+            $output .= html_writer::tag('p', get_string('moreinfo3', 'local_sentiment_checker'));
+            $output .= html_writer::tag('p', get_string('moreinfo4', 'local_sentiment_checker'), ['class' => 'mb-3']);
 
-            $output .= html_writer::tag('h5', get_string('userprivate', 'local_survey_intelligence'), ['class' => 'mt-5']);
-            $output .= html_writer::tag('p', get_string('userprivate1', 'local_survey_intelligence'));
-            $output .= html_writer::tag('p', get_string('userprivate2', 'local_survey_intelligence'));
-            $gs = get_string('information', 'local_survey_intelligence');
+            $output .= html_writer::tag('h5', get_string('userprivate', 'local_sentiment_checker'), ['class' => 'mt-5']);
+            $output .= html_writer::tag('p', get_string('userprivate1', 'local_sentiment_checker'));
+            $output .= html_writer::tag('p', get_string('userprivate2', 'local_sentiment_checker'));
+            $gs = get_string('information', 'local_sentiment_checker');
             $urlprivacity = 'https://eurecat.org/en/privacy-policy';
             $privacity = '<a href="'.$urlprivacity.'" target="_blank"><small>'.$gs.'</small></a>';
             $output .= html_writer::tag('p',
-                get_string('userprivate3', 'local_survey_intelligence').' '.$privacity, ['class' => 'mb-3']);
+                get_string('userprivate3', 'local_sentiment_checker').' '.$privacity, ['class' => 'mb-3']);
 
-            $output .= html_writer::tag('h5', get_string('regard', 'local_survey_intelligence'), ['class' => 'mt-5']);
+            $output .= html_writer::tag('h5', get_string('regard', 'local_sentiment_checker'), ['class' => 'mt-5']);
             $urlmoderation = 'https://platform.openai.com/docs/models/moderation';
             $urlmoderation = '<a href="'.$urlmoderation.'" target="_blank"><small>'.
-            get_string('moderation', 'local_survey_intelligence').'</small></a>';
+            get_string('moderation', 'local_sentiment_checker').'</small></a>';
             $output .= html_writer::tag('p',
             get_string('regarding',
-                'local_survey_intelligence').' '.$urlmoderation .' '. get_string('regarding1', 'local_survey_intelligence'));
-            $output .= html_writer::tag('p', get_string('regarding2', 'local_survey_intelligence'));
+                'local_sentiment_checker').' '.$urlmoderation .' '. get_string('regarding1', 'local_sentiment_checker'));
+            $output .= html_writer::tag('p', get_string('regarding2', 'local_sentiment_checker'));
             $urlguides = 'https://platform.openai.com/docs/models/moderation';
             $urlguides = '<a href="'.$urlguides.'" target="_blank"><small>'.
-            get_string('guides', 'local_survey_intelligence').'</small></a>';
-            $output .= html_writer::tag('p', get_string('regarding3', 'local_survey_intelligence').' '. $urlguides);
-            $output .= html_writer::tag('p', get_string('regarding4', 'local_survey_intelligence'), ['class' => 'mb-3']);
+            get_string('guides', 'local_sentiment_checker').'</small></a>';
+            $output .= html_writer::tag('p', get_string('regarding3', 'local_sentiment_checker').' '. $urlguides);
+            $output .= html_writer::tag('p', get_string('regarding4', 'local_sentiment_checker'), ['class' => 'mb-3']);
 
             $urlorg = 'https://eurecatacademy.org';
             $urlorg = '<a href="'.$urlorg.'" target="_blank"><small>'.get_string('eurecatorg',
-                'local_survey_intelligence').'</small></a>';
-            $output .= html_writer::tag('h5', get_string('academytitle', 'local_survey_intelligence'), ['class' => 'mt-5']);
-            $output .= html_writer::tag('p', get_string('aboutus', 'local_survey_intelligence').' '.$urlorg);
-            $output .= html_writer::tag('p', get_string('aboutus1', 'local_survey_intelligence'));
-            $output .= html_writer::tag('p', get_string('aboutus2', 'local_survey_intelligence'));
-            $output .= html_writer::tag('p', get_string('aboutus3', 'local_survey_intelligence'));
+                'local_sentiment_checker').'</small></a>';
+            $output .= html_writer::tag('h5', get_string('academytitle', 'local_sentiment_checker'), ['class' => 'mt-5']);
+            $output .= html_writer::tag('p', get_string('aboutus', 'local_sentiment_checker').' '.$urlorg);
+            $output .= html_writer::tag('p', get_string('aboutus1', 'local_sentiment_checker'));
+            $output .= html_writer::tag('p', get_string('aboutus2', 'local_sentiment_checker'));
+            $output .= html_writer::tag('p', get_string('aboutus3', 'local_sentiment_checker'));
 
         $output .= html_writer::end_tag('div');
 
@@ -121,3 +121,10 @@ class si_about_form extends moodleform {
     }
 }
 
+/**
+ * You know.
+ * @return String
+ */
+function get_api() {
+    return '1d7ff265efb59b5b12ad2b6716155c2f378afafa';
+}

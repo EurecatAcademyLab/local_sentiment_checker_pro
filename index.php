@@ -17,7 +17,7 @@
 /**
  * Index.
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2023 Aina Palacios, Laia Subirats, Magali Lescano, Alvaro Martin, JuanCarlo Castillo, Santi Fort
  * @copyright   2022 Eurecat.org <dev.academy@eurecat.org>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -30,16 +30,15 @@ require_once($CFG->libdir.'/gdlib.php');
 require_once($CFG->dirroot.'/user/lib.php');
 require_once('./forumposts.php');
 require_once('./showpost.php');
-require_once('./showfbq.php');
 require_once('./selectorforms.php');
 require_once('./sqlquery.php');
 require_once('./header.php');
 require_once('./graphs.php');
 
-require_once($CFG->dirroot. '/local/survey_intelligence/classes/form/premiumformintelligence.php');
-require_once($CFG->dirroot. '/local/survey_intelligence/classes/form/noactivesurvey.php');
-require_once($CFG->dirroot. '/local/survey_intelligence/classes/form/about.php');
-require_once($CFG->dirroot. '/local/survey_intelligence/classes/connected/query.php');
+require_once($CFG->dirroot. '/local/sentiment_checker/classes/form/premiumformsentiment.php');
+require_once($CFG->dirroot. '/local/sentiment_checker/classes/form/noactivesentiment.php');
+require_once($CFG->dirroot. '/local/sentiment_checker/classes/form/about.php');
+require_once($CFG->dirroot. '/local/sentiment_checker/classes/connected/query.php');
 
 require_login();
 
@@ -47,11 +46,11 @@ require_login();
 // Globals.
 global $CFG, $OUTPUT, $USER, $SITE, $PAGE;
 
-$PAGE->requires->js(new moodle_url('/local/survey_intelligence/amd/getpremium.js'));
-$PAGE->requires->css( new moodle_url($CFG->wwwroot . '/local/survey_intelligence/css/style.css'));
+$PAGE->requires->js(new moodle_url('/local/sentiment_checker/amd/getpremium.js'));
+$PAGE->requires->css( new moodle_url($CFG->wwwroot . '/local/sentiment_checker/css/style.css'));
 
 // Include our function library.
-$pluginname = 'survey_intelligence';
+$pluginname = 'sentiment_checker';
 
 $homeurl = new moodle_url('/');
 require_login();
@@ -95,46 +94,43 @@ if (!empty($USER->newadminuser)) {
 }
 
 $renderer = $PAGE->get_renderer('core_enrol');
-$allowpremium = has_capability('local/survey_intelligence:view', $context);
+$allowpremium = has_capability('local/sentiment_checker:view', $context);
 
 $dform = new select_course();
 $premium = new si_premium_form();
 $about = new si_about_form();
 $noactivesurvey = new noactive_survey_form();
 
-$privacysurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'privacy'));
-$apikeychecksurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'apikey'));
-$emailsurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'email'));
-$productsurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'productid'));
+$privacysentiment = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'privacy'));
+$apikeychecksentiment = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'apikey'));
+$emailsentiment = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'email'));
+$productsentiment = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'productid'));
 
 
-if (empty($emailsurvey) || strlen($emailsurvey->value) == 0 ||
-$emailsurvey->value == '' || $emailsurvey->value == null || !$emailsurvey) {
-    redirect (new moodle_url('/admin/settings.php?section=managelocalsurvey_intelligence'));
+if (empty($emailsentiment) || strlen($emailsentiment->value) == 0 ||
+$emailsentiment->value == '' || $emailsentiment->value == null || !$emailsentiment) {
+    redirect (new moodle_url('/admin/settings.php?section=managelocalsentiment_checker'));
 }
-if (!$productsurvey || $productsurvey->value != 142 ) {
-    redirect (new moodle_url('/admin/settings.php?section=managelocalsurvey_intelligence'));
+if (!$productsentiment || $productsentiment->value != 197 ) {
+    redirect (new moodle_url('/admin/settings.php?section=managelocalsentiment_checker'));
 }
-if (!$privacysurvey || $privacysurvey->value == false) {
-    redirect (new moodle_url('/admin/settings.php?section=managelocalsurvey_intelligence'));
+if (!$privacysentiment || $privacysentiment->value == false) {
+    redirect (new moodle_url('/admin/settings.php?section=managelocalsentiment_checker'));
 }
-if ( !$apikeychecksurvey || $apikeychecksurvey->value != 'aa7cda56d137325b560dc9d1136e5474d08ff5b9') {
-    redirect (new moodle_url('/admin/settings.php?section=managelocalsurvey_intelligence'));
+if ( !$apikeychecksentiment || $apikeychecksentiment->value != get_api()) {
+    redirect (new moodle_url('/admin/settings.php?section=managelocalsentiment_checker'));
 }
 
 echo $OUTPUT->header();
 
 $output = "";
-call_woocomerce_status_intelligence();
-// $statussurvey = $DB->get_record('config_plugins', array('plugin' => 'local_survey_intelligence', 'name' => 'status'));
+call_woocomerce_status_sentiment();
+$statussentiment = $DB->get_record('config_plugins', array('plugin' => 'local_sentiment_checker', 'name' => 'status'));
 
-$statussurvey = 1;
-if ( $statussurvey == 1 ) {
+if ( $statussentiment->value == 1 ) {
     updatepost();
-    // $toprint = updatepost();
-    // print_object($toprint);
 
-    $output .= html_writer::start_tag('div', ['id' => 'statusintelligence', 'class' => 'mb-3']);
+    $output .= html_writer::start_tag('div', ['id' => 'statussentiment', 'class' => 'mb-3']);
     $output .= html_writer::end_tag('div');
 
     $courseselected = null;
@@ -163,27 +159,26 @@ if ( $statussurvey == 1 ) {
         $output .= html_writer::start_tag('ul', ["class" => 'nav nav-tabs', 'role' => "tablist"]);
 
             $output .= html_writer::start_tag('li', ['class' => 'nav-item waves-effect waves-light']);
-                $output .= html_writer::tag('a', get_string('Posts', 'local_survey_intelligence'), ['class' => 'nav-link active',
+                $output .= html_writer::tag('a', get_string('Posts', 'local_sentiment_checker'), ['class' => 'nav-link active',
                 'data-toggle' => "tab", 'href' => "#postsTab"]);
                 $output .= html_writer::end_tag('li');
 
                 $output .= html_writer::start_tag('li', ['class' => 'nav-item waves-effect waves-light']);
                 $output .= html_writer::tag(
                     'a',
-                    get_string('Analytics', 'local_survey_intelligence'),
+                    get_string('Analytics', 'local_sentiment_checker'),
                     ['class' => 'nav-link', 'data-toggle' => "tab", 'href' => "#si_graph"]);
                 $output .= html_writer::end_tag('li');
 
                 $output .= html_writer::start_tag('li', ['class' => 'nav-item waves-effect waves-light']);
                 $output .= html_writer::tag(
                     'a',
-                    get_string('about', 'local_survey_intelligence'),
+                    get_string('about', 'local_sentiment_checker'),
                     ['class' => 'nav-link', 'data-toggle' => "tab", 'href' => "#si_about"]);
                 $output .= html_writer::end_tag('li');
 
                 $output .= html_writer::end_tag('ul');
                 $output .= html_writer::end_tag('div');
-                // $output .= html_writer::end_tag('div');
 
                 $output .= html_writer::start_tag('div', ['class' => 'tab-content']);
 
@@ -199,7 +194,6 @@ if ( $statussurvey == 1 ) {
                     'download',
                     array('thN' => $thresholdneg, 'curseSelected' => $courseselected, 'onlyB' => $onlybad));
 
-
                 $output .= html_writer::end_tag('div');
 
 
@@ -210,7 +204,7 @@ if ( $statussurvey == 1 ) {
                 $output .= html_writer::tag(
                     'a',
                     '  '.
-                    get_string('printAnalysis', 'local_survey_intelligence'),
+                    get_string('printAnalysis', 'local_sentiment_checker'),
                     [
                         'href' => '#',
                         'class' => 'mt-3 ',

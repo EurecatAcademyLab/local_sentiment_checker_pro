@@ -17,7 +17,7 @@
 /**
  * Plugin strings are defined here. Catalan.
  *
- * @package     local_survey_intelligence
+ * @package     local_sentiment_checker
  * @author      2023 Aina Palacios, Laia Subirats, Magali Lescano, Alvaro Martin, JuanCarlo Castillo, Santi Fort
  * @copyright   2022 Eurecat.org <dev.academy@eurecat.org>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -108,22 +108,22 @@ $string['privacy:metadata:textpolarity'] = 'Polaritat del missatge';
 $string['privacy:metadata:translation'] = "En cas de traduir a l'espanyol";
 $string['privacy:metadata:idpost'] = "Publicat per l'usuari";
 $string['privacy:metadata:language'] = "Idioma de l'usuari detectat";
-$string['privacy:metadata:localsurvey_intelligenceforumpost'] = "Informació guardada per a l'usuari";
+$string['privacy:metadata:localsentiment_checkerforumpost'] = "Informació guardada per a l'usuari";
 $string['privacy:metadata:anonymus'] = 'Per a mostrar usuari anònim';
 $string['privacy:metadata:courseid'] = "Curs d'usuari";
 $string['privacy:metadata:value'] = 'Valor';
 $string['privacy:metadata:label'] = 'Etiqueta';
 $string['privacy:metadata:feedbackname'] = '';
-$string['privacy:metadata:localsurvey_intelligencefeedback'] = "Dades guardades de l'usuari";
+$string['privacy:metadata:localsentiment_checkerfeedback'] = "Dades guardades de l'usuari";
 
 // Settings.
 $string['email'] = 'Correu electrònic';
 $string['email_des'] = 'Ingressi el seu correu';
 $string['productid'] = 'Identificador de producte';
 $string['productid_des'] = 'El seu producte actual';
-$string['manage'] = "Anàlisi d'Enquestes";
+$string['manage'] = "Sentiment Checker";
 $string['showinnavigation'] = 'Mostrar navegació';
-$string['showinnavigation_desc'] = "Quan s'activi, la navegació del lloc mostrarà un enllaç al Intel·ligència d'Enquestes";
+$string['showinnavigation_desc'] = "Quan s'activi, la navegació del lloc mostrarà un enllaç al Sentiment Checker";
 $string['apikey'] = 'APIKey';
 $string['apikey_des'] = 'Insereixi la clau APIKey';
 $string['name'] = 'Cognom';
@@ -136,7 +136,7 @@ $string['activate'] = 'Activar';
 
 // Description.
 $string['Describ'] = "Sobre aquest plugin";
-$string['Describtion'] = "El plugin utilitza el processament del llenguatge natural (PLN) per a extreure el suggeriment de les respostes obertes en les enquestes de qualitat. Això permet obtenir informació més precisa a partir de les respostes dels usuaris a les preguntes obertes que els valors mitjans habituals calculats únicament a partir de dades quantitatives.";
+$string['Describtion'] = "El plugin utilitza el processament del llenguatge natural (PLN) per a extreure el suggeriment de les respostes obertes en els forum de qualitat. Això permet obtenir informació més precisa a partir de les respostes dels usuaris a les preguntes obertes que els valors mitjans habituals calculats únicament a partir de dades quantitatives.";
 $string['more'] = "Com funciona";
 $string['moreinfo'] = "Per a representar els Posts analitzats de manera senzilla i gràfica, hem creat un Plugin local que pot ser instal·lat en qualsevol plataforma Moodle. Llegeix automàticament la base de dades cada vegada que ho usem, i mostra els posts en ordre de modificació/creació. el mòdul llegeix els posts automàticament en un procés en segon pla que evitarà la necessitat de carregar el programa per a llegir els nous posts.";
 $string['moreinfo1'] = "Aquest plugin consta de 3 parts: un formulari per a modificar paràmetres, una pestanya amb els posts i una altra amb anàlisis.";
@@ -182,7 +182,7 @@ $string['eurecat'] = "Eurecat Academy";
 $string['eurecatorg'] = "Eurecat.org";
 
 // Premium.
-$string['premium'] = "* Actualitzar a la versió Premium - Anàlisi d'Enquestes";
+$string['premium'] = "* Actualitzar a la versió Premium - Sentiment Checker";
 $string['premiumpage'] = 'Eurecat.Lab';
 $string['keepquarentine'] = '* Afegeix la posibilitat per canviar el llindar negatiu';
 $string['removequarentine'] = "* Afegeix la posibilitat per canviar el llindar positiu";
